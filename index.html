@@ -154,7 +154,7 @@
         /* Center alignments explicitly on the initial Menu view screen layout */
         #story-text.menu-centered {
             text-align: center !important;
-            font-size: 1.8rem !important;
+            font-size: 2.5rem !important; /* Desktop Title Font Size */
             letter-spacing: 4px;
             color: #ffffff !important;
             max-height: none !important;
@@ -243,7 +243,7 @@
                 max-height: 48vh;
             }
             #story-text.menu-centered {
-                font-size: 1.4rem !important;
+                font-size: 2.2rem !important; /* Mobile Title Font Size */
             }
             .next-btn {
                 width: 100%;
@@ -488,7 +488,8 @@
         }
 
         window.onload = () => {
-            renderAnimatedText("Noan's Favorite Horror Stories!", false);
+            // FIXED LINE: This now injects your updated interface title perfectly on page initialization
+            renderAnimatedText("Noan's Favorite Stories // Enter", false);
             ghostLoop();
         };
     </script>
