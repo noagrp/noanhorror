@@ -13,6 +13,8 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            /* Mobile-Safe Viewport calculation framework */
+            min-height: -webkit-fill-available;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,6 +22,10 @@
             position: relative;
             user-select: none;
             -webkit-user-select: none;
+        }
+
+        html {
+            height: -webkit-fill-available;
         }
 
         /* Fixed Audio Panel - Locked to Bottom Right Permanently */
@@ -68,6 +74,13 @@
             padding: 40px 30px;
             border-radius: 16px;
             transition: all 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            /* Safe Height boundaries preventing viewport breakage on short devices */
+            max-height: 85vh;
             
             /* Glassmorphism Effect Rules */
             background: rgba(255, 255, 255, 0.02) !important;
@@ -83,6 +96,7 @@
             max-width: 100% !important;
             width: 100vw !important;
             height: 100vh !important;
+            max-height: 100vh !important;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -111,9 +125,12 @@
             font-size: 1.25rem;
             line-height: 1.8;
             min-height: 140px;
-            max-height: 50vh; /* Limits the text window to half screen height */
-            overflow-y: auto; /* Enables auto scrolling for massive stories */
+            
+            /* Dynamic height balancing for ultra short or cramped phone displays */
+            max-height: 55vh; 
+            overflow-y: auto; 
             scrollbar-width: none; /* Hides scrollbar for Firefox */
+            width: 100%;
             display: block; 
             text-align: justify;
             text-justify: inter-word;
@@ -154,6 +171,7 @@
             padding: 12px 28px;
             border-radius: 8px;
             color: #ffffff !important;
+            flex-shrink: 0; /* Prevents button from collapsing on tiny screens */
             
             background: rgba(153, 27, 27, 0.15) !important;
             backdrop-filter: blur(4px) !important;
@@ -199,24 +217,28 @@
             opacity: 0 !important;
         }
 
-        @media (max-width: 580px) {
+        /* Mobile and Landscape Short Screen Optimizations */
+        @media (max-width: 580px), (max-height: 600px) {
             .audio-controls {
-                bottom: 15px !important;
-                right: 15px !important;
+                bottom: 12px !important;
+                right: 12px !important;
             }
             .card-container {
-                margin-bottom: 40px;
-                padding: 30px 20px;
+                padding: 25px 20px;
                 width: 90%;
+                max-height: 82vh;
+                margin-bottom: 20px;
             }
             .card-container.is-menu-state {
                 width: 100vw !important;
                 height: 100vh !important;
+                max-height: 100vh !important;
                 margin-bottom: 0px;
             }
             #story-text {
                 font-size: 1.1rem;
-                min-height: 160px;
+                min-height: 120px;
+                max-height: 48vh;
             }
             #story-text.menu-centered {
                 font-size: 2.2rem !important;
@@ -224,6 +246,8 @@
             .next-btn {
                 width: 100%;
                 box-sizing: border-box;
+                margin-top: 20px;
+                padding: 10px 20px;
             }
         }
     </style>
@@ -462,7 +486,7 @@
         }
 
         window.onload = () => {
-            renderAnimatedText("Enter", false);
+            renderAnimatedText("Noan's Favorite Horror Stories!", false);
             ghostLoop();
         };
     </script>
