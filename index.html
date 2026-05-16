@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noan's Favorite Horror Stories!</title>
+    <style>
+        /* Base Pure Dark Atmosphere */
+        body {
+            background-color: #020204 !important;
+            color: #ffffff !important;
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Fixed Audio Panel - Locked to Bottom Right Permanently */
+        .audio-controls {
+            position: fixed;
+            bottom: 20px !important;
+            right: 20px !important;
+            top: auto !important;
+            left: auto !important;
+            z-index: 20; /* Higher than card container to absolutely prevent overlaps */
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-btn {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            color: #444444 !important;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            padding: 0;
+            margin: 0;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .control-btn:hover {
+            color: #7f1d1d !important;
+        }
+        .control-btn.muted {
+            color: #1a1a1a !important;
+        }
+
+        /* Responsive Glassmorphism Story Box Container (No Border) */
+        .card-container {
+            position: relative;
+            z-index: 5; 
+            max-width: 550px;
+            width: 85%;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 40px 30px;
+            border-radius: 16px;
+            transition: all 0.5s ease-in-out;
+            
+            /* Glassmorphism Effect Rules */
+            background: rgba(255, 255, 255, 0.02) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            
+            border: none !important;
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.8) !important;
+        }
+
+        /* Menu State: Forces perfect vertical/horizontal fullscreen centering for the Enter word */
+        .card-container.is-menu-state {
+            max-width: 100% !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            box-shadow: none !important;
+            padding: 0;
+        }
+
+        /* Full Word Shaking Structure Base */
+        .word-shiver {
+            display: inline-block;
+            white-space: pre; 
+            animation: wordTremble 0.22s infinite alternate ease-in-out;
+        }
+
+        @keyframes wordTremble {
+            0% { transform: translate(0.4px, 0.2px) rotate(0deg); }
+            50% { transform: translate(-0.2px, -0.3px) rotate(-0.1deg); }
+            100% { transform: translate(0.3px, -0.2px) rotate(0.1deg); }
+        }
+
+        #story-text {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            min-height: 140px;
+            max-height: 50vh; /* Limits the text window to half screen height */
+            overflow-y: auto; /* Enables auto scrolling for massive stories */
+            scrollbar-width: none; /* Hides scrollbar for Firefox */
+            display: block; 
+            text-align: justify;
+            text-justify: inter-word;
+            color: #e5e7eb !important;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            margin: 0;
+            padding: 0;
+            transition: font-size 0.3s ease;
+        }
+
+        /* Hide scrollbars completely for Chrome, Safari, Opera */
+        #story-text::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Center alignments explicitly on the initial Menu view screen layout */
+        #story-text.menu-centered {
+            text-align: center !important;
+            font-size: 2.5rem !important;
+            letter-spacing: 4px;
+            color: #ffffff !important;
+            max-height: none !important;
+            overflow-y: visible !important;
+        }
+
+        /* Glassmorphic Action Button Configuration (No Border) */
+        .next-btn {
+            display: inline-block;
+            margin-top: 35px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            padding: 12px 28px;
+            border-radius: 8px;
+            color: #ffffff !important;
+            
+            background: rgba(153, 27, 27, 0.15) !important;
+            backdrop-filter: blur(4px) !important;
+            -webkit-backdrop-filter: blur(4px) !important;
+            border: none !important; 
+            outline: none !important;
+            box-shadow: none !important;
+            
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .next-btn:hover {
+            background: rgba(239, 68, 68, 0.3) !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        /* Highly Recognizable Floating Background Ghosts */
+        .bg-ghost {
+            position: absolute;
+            z-index: 1;
+            cursor: pointer;
+            filter: blur(2px);
+            animation: floatAndFade 10s ease-in-out forwards;
+        }
+
+        /* Ghost Inner container element allows scale flipping over animation space paths */
+        .bg-ghost-body {
+            display: inline-block;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+            transform: var(--base-flip);
+        }
+
+        @keyframes floatAndFade {
+            0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
+            25% { opacity: var(--target-opacity); }
+            75% { opacity: var(--target-opacity); }
+            100% { opacity: 0; transform: translate(var(--x-drift), var(--y-drift)) scale(1.1); }
+        }
+
+        .bg-ghost.fly-away .bg-ghost-body {
+            transform: translateY(-350px) scale(0.1) rotate(60deg) !important;
+            opacity: 0 !important;
+        }
+
+        @media (max-width: 580px) {
+            .audio-controls {
+                bottom: 15px !important;
+                right: 15px !important;
+            }
+            .card-container {
+                margin-bottom: 40px;
+                padding: 30px 20px;
+                width: 90%;
+            }
+            .card-container.is-menu-state {
+                width: 100vw !important;
+                height: 100vh !important;
+                margin-bottom: 0px;
+            }
+            #story-text {
+                font-size: 1.1rem;
+                min-height: 160px;
+            }
+            #story-text.menu-centered {
+                font-size: 2.2rem !important;
+            }
+            .next-btn {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="audio-controls">
+        <button id="voice-btn" class="control-btn" onclick="toggleVoiceEngine()">VOICE: ON</button>
+    </div>
+
+    <!-- Main Glassmorphism Framework Interface Box (Starts in Fullscreen Centered Menu State) -->
+    <div id="main-frame-box" class="card-container is-menu-state" style="cursor: pointer;" onclick="enterTheHorror()">
+        <!-- Title & Story Container Element Node -->
+        <div id="story-text" class="menu-centered">Enter</div>
+        
+        <!-- Action Button Element Node -->
+        <button id="action-trigger" class="next-btn" style="display: none;" onclick="showRandomStory(event)">Read Another</button>
+    </div>
+
+    <script>
+        const ghostStories = [
+            "The scratching inside my bedroom wall always started at exactly 3:14 AM. I tried convincing myself it was just mice navigating the old insulation, trying desperately to block out the rhythmic, agonizing sound. But mice don't breathe with a wet, ragged rattle, and mice certainly don't whisper your name through the electrical outlets when the lights go out.\n\nLast night, the scratching stopped abruptly, plunging the room into a suffocating, absolute silence. I lay paralyzed in the dark, my heart hammering against my ribs as a cold, foul-smelling draft swept across my face. Slowly, the darkness in the corner of my ceiling began to detach itself, stretching downward toward my bed.\n\nThat's when I realized the scratching hadn't stopped because whatever it was gave up. It stopped because it finally found the way out.",
+
+            "My smart-home camera app sent a notification to my phone while I was working late at the office: 'Movement detected in Master Bedroom.' Shrugging it off as a glitch, I opened the live video feed expecting to see an empty room. Instead, the night-vision camera showed a tall, gaunt figure draped in a soiled white sheet, standing perfectly still over my sleeping dog.\n\nI watched in absolute horror as the figure slowly turned its head directly toward the camera lens, as if it knew I was watching from miles away. It raised a long, skeletal finger to its gray, fleshless lips, whispering a chilling command that somehow crackled through my phone's speaker.\n\n'Hurry home,' the voice rasped, right before the feed went completely black.",
+
+            "Growing up with an identical twin meant never truly feeling alone in our old, creaking country house. Even after Sarah tragically passed away in the lake that summer, I could still hear her soft footsteps pacing the upstairs hallway at night. I found comfort in her residual presence, believing she was watching over me.\n\nBut comfort turned to sheer terror this morning when I looked into the bathroom mirror to brush my teeth. My reflection didn't mimic my movements; instead, it stood perfectly still, eyes hollow and sunken, skin bloated and dripping with dark, stagnant lake water.\n\nShe leaned close to the glass, her wet lips forming words that chilled my soul: 'You promised we would share everything. It's your turn to drown.'",
+
+            "The insomnia clinic promised that their new experimental sleep tracking app would revolutionize how I rested. It required placing my phone face-up on the nightstand, allowing the front camera to monitor my micro-expressions during the rapid eye movement phase.\n\nOn the third night, I woke up around 2:00 AM feeling an unnatural, heavy weight pressing firmly down on my chest. I couldn't move a single muscle, trapped entirely in the clutches of sleep paralysis while my breathing grew shallow and panicked.\n\nThe next morning, I opened the app to review the recorded nighttime time-lapse data. The video showed me sleeping peacefully until midnight, when a pale, hairless face slowly crawled out from beneath my bed, smiled directly into the camera, and sat heavily on my chest until dawn.",
+
+            "I bought an antique hand mirror at a secluded estate sale down in the valley, enchanted by its intricate, tarnished silver frame. The old woman selling it refused to look at the glass, locking it in a velvet box and warning me never to clean it after midnight.\n\nNaturally, curiosity got the best of me, and at 1:00 AM I began wiping away decades of thick dust and grime. As the glass cleared, I realized the room reflected behind me wasn't my bedroom at all, but a dark, stone basement lined with rusted chains.\n\nI spun around around frantically, but my bedroom was completely normal. When I looked back at the mirror, a shadowy figure was standing right behind my reflection, wrapping its cold, black hands around my throat in the glass while I began to choke in real life.",
+
+            "The dentist insisted the persistent, agonizing phantom pain in my lower jaw was simply nerve damage from a recent wisdom tooth extraction. He prescribed heavy painkillers and told me to rest, assuring me the throbbing sensation would fade within a few days.\n\nBut tonight, the pain transformed into a sharp, rhythmic scratching sensation deep within my gums. I rushed to the bathroom, grabbed a pair of tweezers, and pried open my mouth under the harsh fluorescent light to investigate the wound.\n\nTucking the metal tip into the raw incision, I didn't find a forgotten bone fragment or root. I gripped something hard and pulled, watching in absolute horror as a long, thick strand of coarse, black hair uncoiled from deep inside my jaw, followed by a tiny, wet voice whispering, 'Thank you for letting me out.'",
+
+            "I found a cheap, beautifully preserved baby monitor at a local garage sale to keep an eye on my new golden retriever puppy overnight. I set the camera up in the kitchen and kept the audio receiver on my nightstand, falling asleep to the gentle sounds of his soft breathing.\n\nAt roughly 3:00 AM, a low, crackling static woke me from a deep slumber. Through the speaker, I could hear my puppy whimpering low in terror, backed by the heavy, rhythmic scraping of something dragging itself across the hardwood floor.\n\nBefore I could get out of bed, a dry, raspy voice hissed into the microphone, right next to the whimpering dog: 'Don't come downstairs. I'm teaching him how to growl your name.'",
+
+            "There is a deep, jagged scratch mark on the inside of my basement door that seems to grow a few millimeters longer every single day. I blamed it on the house settling or old wood warping, trying desperately to ignore the mathematical precision of the expanding groove.\n\nYesterday afternoon, the mark finally reached all the way down to the heavy brass lock mechanism. I stared at it for an hour, a knot of unease tightening in my stomach, before double-checking the deadbolt and heading up to bed.\n\nThis morning, I woke up to a freezing cold draft licking at my ankles. I walked into the hallway and froze: the basement door was standing wide open, and a trail of wet, muddy footprints led directly into my bedroom closet.",
+
+            "I have always loved looking at old, black-and-white panoramic photos of crowded city streets from the early 1900s, fascinated by the forgotten lives of the people captured in time. Last week, I bought a sprawling 1924 photograph of a bustling London market to hang in my study.\n\nWhile examining the details with a magnifying glass, my heart stopped when I noticed a pale, hollow-eyed face standing completely still in the background crowd, staring directly at the camera with a sinister grin.\n\nYesterday, I bought another photo from a completely different shop, this one taken in New York in 1948. Shaking, I looked at the far left edge of the frame, only to find the exact same pale, unblinking face smiling back at me, holding a sign that read: 'I'm getting closer.'",
+
+            "My wife woke me up in the dead of night to complain that the old radiator in the corner of our room was making a strange, metallic clanking sound again. Groaning, I rolled over and reached out under the heavy blanket to pat her leg, telling her I'd fix it first thing in the morning.\n\nMy hand brushed against her skin under the covers, but it felt terribly wrong—shockingly icy, wet, and completely rigid, like meat left too long in a freezer. I stiffened, my breath catching in my throat as a wave of primitive dread washed over me.\n\nRight then, the master bedroom door slowly creaked open, and my wife stepped into the room from the brightly lit hallway, rubbing her eyes and whispering, 'Honey, did you hear that noise too?'",
+
+            "I fell asleep on the late-night commuter train and woke up completely alone, sitting at a pitch-black, abandoned underground platform. The train doors were stuck wide open, casting a dim, flickering fluorescent light onto the dirty concrete outside.\n\nI stepped onto the platform, the echo of my boots sounding terrifyingly loud in the cavernous silence. As I looked around for an exit sign, the station's ancient emergency intercom suddenly crackled to life with a loud, piercing shriek.\n\nA wet, gargling voice boomed over the speakers, echoing off the tiled walls: 'The last train has departed. The feast has begun.' From the darkness of the tracks behind me, hundreds of pale, elongated hands began spilling over the edge.",
+
+            "The digital clock on my nightstand has been frozen at precisely 3:13 AM for three consecutive days. No matter how many hours I spend watching the sun rise and set outside, the glowing red numbers refuse to change, trapped in a permanent loop.\n\nI tried unplugging it, but the red display remained lit, burning into the darkness of my room. When I went to throw it in the trash, I noticed the window glass looked strange, warped and completely black despite it being noon.\n\nI tapped the window pane, and it didn't sound like glass—it sounded like solid iron. I looked out, only to realize the sun hadn't risen at all; the world outside had simply been replaced by an infinite, silent void.",
+
+            "I always thought the faint, rhythmic whispering sound in my apartment was just the autumn wind passing through the old, cracked window frames. I grew used to it, letting the soft murmur lull me to sleep on lonely winter nights.\n\nTonight, however, the air was completely still, but the whispering grew significantly louder, vibrating directly through the wooden floorboards beneath my feet. I knelt down, pressing my ear tightly against the floor to finally understand the words.\n\nIt wasn't a random murmur at all. A thin, breathless voice was repeating a single, terrifying instruction: 'Don't look at the ceiling, I'm already upside down.'",
+
+            "The custom-built grandfather clock I inherited from my eccentric grandfather was famous for its perfect, unyielding accuracy. It had chimed every single hour for fifty years without a single delay, a masterpiece of mechanical engineering.\n\nBut tonight, as the hands crept toward midnight, the clock didn't strike twelve times. It struck thirteen, each metallic ring sounding deeper, heavier, and more distorted than the last, vibrating through the structural beams of the house.\n\nWith the final, impossible chime, the regular ticking stopped entirely. In the absolute silence that followed, I heard the heavy wooden door of the clock frame slowly unlatch from the inside, accompanied by the wet thud of something heavy stepping out onto the floor.",
+
+            "My daughter has an imaginary friend named 'The Long Man' who she claims lives in the crawlspace beneath her bedroom closet. I laughed it off as a normal childhood phase, telling her that monsters weren't real and couldn't hurt her.\n\nThis evening, I went into her room to clean up her toys and noticed her closet door was standing slightly ajar. I reached in to shut it, but my hand caught on something hanging from the top shelf.\n\nIt was a hand-drawn picture my daughter had made earlier that day. It depicted our family sleeping in our beds, with a massive, multi-jointed creature winding its way out of the closet, its face inches from mine, captioned: 'He likes you best.'",
+
+            "The old highway route through the blackwood pine forest was completely abandoned after midnight, devoid of any streetlights or passing cars. I rolled down my driver's side window to let the crisp night air keep me awake during the long drive home.\n\nSuddenly, my headlights caught a figure standing right in the middle of the dark road ahead. I slammed on the brakes, my tires screeching violently as the car skidded to a halt just inches away from a pale, naked woman.\n\nShe didn't move or blink, her eyes entirely hollow and pitch black. Before I could shift into reverse, the car's internal lock buttons all clicked down simultaneously, and the radio began violently looping a manic, high-pitched scream.",
+
+            "I bought a vintage polaroid camera at a local thrift store, eager to capture some artistic, retro photos of my apartment. I loaded a fresh pack of film, pointed the lens toward my empty living room couch, and snapped a test picture.\n\nAs the white chemical square slowly developed in the light, a dark shape began to materialize on the cushions. It wasn't empty at all; the photo clearly showed a mangled, faceless corpse sitting on my couch, staring directly at me.\n\nMy breath hitched as I looked up at the actual couch, seeing nothing but clean fabric. I took another photo, and when it developed, the corpse was standing up, right in front of the lens, its rotting fingers reaching out of the frame.",
+
+            "The hotel room was cheap, clean, and completely unremarkable, perfect for a single night's stay during my cross-country business trip. The only unusual detail was a tiny, covered peephole drilled into the shared wall between my room and the next.\n\nCuriosity flared around 1:00 AM when I heard a strange, rhythmic wet tapping sound coming from the other side of the wall. I stepped up to the hole, slid the small metal cover aside, and pressed my eye tightly against the opening to peer through.\n\nEverything in the next room was completely red, a deep, saturated crimson color that blurred all structural shapes. Confused, I asked the front desk clerk about the neighbor the next morning; he went pale and whispered, 'That room is locked. The man who died in there had solid red eyes.'",
+
+            "My smartphone began ringing from the kitchen counter at exactly 3:33 AM, flashing an unknown, heavily scrambled number across the screen. I stumbled out of bed, rubbed my eyes, and answered it, assuming it was an emergency call from family.\n\nThere was no voice on the other end, just the sound of heavy, panicked breathing mixed with the loud, unmistakable mechanical hum of my own refrigerator. I froze, a sudden spike of absolute adrenaline turning my blood to ice.\n\nI slowly looked down at the phone screen in my hand, my eyes widening as I read the incoming caller ID metadata that the system had finally managed to decode: it was a call originating directly from my own phone number.",
+
+            "While restoring a crumbling, 19th-century oil portrait I found in my grandfather's attic, I noticed a strange lump behind the canvas. Carefully cutting away the old backing paper, I discovered a hidden velvet pouch containing a single lock of coarse, human hair.\n\nI pulled the hair out to examine it under the light, only to feel a sudden, agonizing burning sensation flare up across my own scalp. Gasping for air, I rushed to the mirror and watched in sheer horror as my own hair began falling out in thick, bloody clumps.\n\nBeneath the missing patches, the skin of my skull was rapidly darkening, forming the distinct, hand-painted brushstrokes of the old portrait's cursed face."
+        ];
+
+        let unreadStories = [];
+        let isVoiceEnabled = true;
+        let hasEntered = false;
+
+        // Optimized Multi-Paragraph Word-by-Word Text Animator
+        function renderAnimatedText(targetText, alignJustify = false) {
+            const container = document.getElementById('story-text');
+            container.innerHTML = ""; 
+            
+            if (alignJustify) {
+                container.classList.remove('menu-centered');
+            } else {
+                container.classList.add('menu-centered');
+            }
+
+            // Split whole string into array blocks by checking double breaks
+            const paragraphs = targetText.split('\n\n');
+
+            paragraphs.forEach((paraText, pIndex) => {
+                const pElement = document.createElement('p');
+                pElement.style.margin = "0 0 1.5rem 0"; 
+                if (pIndex === paragraphs.length - 1) pElement.style.margin = "0"; 
+                
+                const words = paraText.split(' ');
+
+                words.forEach((word, index) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.textContent = word;
+                    wordSpan.classList.add('word-shiver');
+                    wordSpan.style.animationDelay = `${Math.random() * 0.4}s`;
+                    pElement.appendChild(wordSpan);
+
+                    if (index < words.length - 1) {
+                        const space = document.createTextNode(" ");
+                        pElement.appendChild(space);
+                    }
+                });
+
+                container.appendChild(pElement);
+            });
+            
+            container.scrollTop = 0;
+        }
+
+        function enterTheHorror() {
+            if (hasEntered) return;
+            hasEntered = true;
+            
+            const mainBox = document.getElementById('main-frame-box');
+            mainBox.style.cursor = "default";
+            mainBox.removeAttribute('onclick');
+            
+            mainBox.classList.remove('is-menu-state');
+            
+            document.getElementById('action-trigger').style.display = "inline-block";
+            showRandomStory();
+        }
+
+        function showRandomStory(event) {
+            if (event) event.stopPropagation();
+
+            window.speechSynthesis.cancel();
+            
+            const actionBtn = document.getElementById('action-trigger');
+
+            if (unreadStories.length === 0) {
+                unreadStories = [...ghostStories]; 
+                actionBtn.innerText = "Read Another";
+            }
+
+            const randomIndex = Math.floor(Math.random() * unreadStories.length);
+            const chosenStory = unreadStories.splice(randomIndex, 1)[0];
+
+            renderAnimatedText(chosenStory, true);
+            
+            if (unreadStories.length === 0) {
+                actionBtn.innerText = "Read";
+            }
+            
+            if (isVoiceEnabled) {
+                speakStory(chosenStory);
+            }
+        }
+
+        function speakStory(textToSpeak) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                const voices = window.speechSynthesis.getVoices();
+                
+                if (voices.length > 0) {
+                    const maleVoice = voices.find(voice => voice.name.toLowerCase().includes('male') || voice.name.toLowerCase().includes('google uk english male'));
+                    if (maleVoice) utterance.voice = maleVoice;
+                }
+
+                utterance.pitch = 0.3; 
+                utterance.rate = 0.68;  
+                utterance.volume = 1.0; 
+
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+        }
+
+        function toggleVoiceEngine() {
+            const btn = document.getElementById('voice-btn');
+            isVoiceEnabled = !isVoiceEnabled;
+            if (isVoiceEnabled) {
+                btn.innerText = "VOICE: ON";
+                btn.classList.remove('muted');
+            } else {
+                btn.innerText = "VOICE: OFF";
+                btn.classList.add('muted');
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        function spawnGhost() {
+            const ghost = document.createElement('div');
+            ghost.classList.add('bg-ghost');
+            
+            const ghostBody = document.createElement('div');
+            ghostBody.classList.add('bg-ghost-body');
+            ghostBody.innerHTML = '👻';
+            ghost.appendChild(ghostBody);
+
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+            ghost.style.left = startX + 'px';
+            ghost.style.top = startY + 'px';
+
+            const driftX = (Math.random() - 0.5) * 150;
+            const driftY = (Math.random() - 0.5) * 150;
+            ghost.style.setProperty('--x-drift', `${driftX}px`);
+            ghost.style.setProperty('--y-drift', `${driftY}px`);
+
+            const sizeRandom = 1.8 + Math.random() * 3; 
+            ghost.style.fontSize = `${sizeRandom}rem`;
+
+            const flipDirection = Math.random() > 0.5 ? 'scaleX(1)' : 'scaleX(-1)';
+            ghostBody.style.setProperty('--base-flip', flipDirection);
+
+            const randomRoll = Math.random();
+            let targetOpacity = 0.06; 
+            if (randomRoll > 0.85) {
+                targetOpacity = 0.20; 
+            } else if (randomRoll > 0.50) {
+                targetOpacity = 0.12; 
+            }
+            ghost.style.setProperty('--target-opacity', targetOpacity);
+
+            ghost.addEventListener('mousedown', function() {
+                ghost.classList.add('fly-away');
+                setTimeout(() => { ghost.remove(); }, 800);
+            });
+            ghost.addEventListener('touchstart', function() {
+                ghost.classList.add('fly-away');
+                setTimeout(() => { ghost.remove(); }, 800);
+            });
+
+            document.body.appendChild(ghost);
+
+            setTimeout(() => {
+                if (ghost.parentNode) ghost.remove();
+            }, 10000);
+        }
+
+        function ghostLoop() {
+            spawnGhost();
+            const nextSpawnDelay = 2000 + Math.random() * 3000;
+            setTimeout(ghostLoop, nextSpawnDelay);
+        }
+
+        window.onload = () => {
+            renderAnimatedText("Enter", false);
+            ghostLoop();
+        };
+    </script>
+</body>
+</html>
