@@ -580,15 +580,23 @@
             const utterance = new SpeechSynthesisUtterance(cleanText);
             const voices = window.speechSynthesis.getVoices();
 
-            // Setup granular character modulation matrix mappings
+            // Mobile-Adaptive Multi-Voice Filter Engine Block
             if (voices.length > 0) {
                 if (isTeller) {
-                    const femaleVoice = voices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('google uk english female') || v.name.toLowerCase().includes('hazel'));
+                    // Search for explicit female names across desktop and mobile structures
+                    const femaleVoice = voices.find(v => {
+                        const name = v.name.toLowerCase();
+                        return name.includes('female') || name.includes('zira') || name.includes('google uk english female') || name.includes('hazel') || name.includes('siri') && v.lang.includes('en');
+                    });
                     if (femaleVoice) utterance.voice = femaleVoice;
                     utterance.pitch = 0.95;
                     utterance.rate = 0.75;
                 } else {
-                    const maleVoice = voices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('google uk english male') || v.name.toLowerCase().includes('ravi'));
+                    // Search for explicit male names across desktop and mobile architectures
+                    const maleVoice = voices.find(v => {
+                        const name = v.name.toLowerCase();
+                        return name.includes('male') || name.includes('david') || name.includes('google uk english male') || name.includes('daniel') || name.includes('ravi') || name.includes('aaron');
+                    });
                     if (maleVoice) utterance.voice = maleVoice;
                     
                     if (isNormal) {
