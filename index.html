@@ -13,10 +13,10 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            /* TWEAK LINE: Utilizes modern Dynamic Viewport Height to lock bounds flawlessly on mobile without ghost scrolling */
+            min-height: 100dvh; 
             max-width: 100vw; /* Locks horizontal boundaries strictly to the device hardware */
             contain: paint;   /* Prevents floating entities from pulling or expanding the layout */
-            /* Mobile-Safe Viewport calculation framework */
-            min-height: -webkit-fill-available;
             display: flex;
             flex-direction: column; /* Clean vertical stacked grouping */
             justify-content: center;
@@ -28,7 +28,8 @@
         }
 
         html {
-            height: -webkit-fill-available;
+            height: 100vh;
+            height: 100dvh;
         }
 
         /* Fixed Audio Panel - Locked to Top Right Permanently */
@@ -93,6 +94,7 @@
             
             /* Safe Height boundaries preventing viewport breakage on short devices */
             max-height: 80vh;
+            max-height: 80dvh;
             
             /* Glassmorphism Effect Rules */
             background: rgba(255, 255, 255, 0.02) !important;
@@ -108,7 +110,9 @@
             max-width: 100% !important;
             width: 100vw !important;
             height: 100vh !important;
+            height: 100dvh !important;
             max-height: 100vh !important;
+            max-height: 100dvh !important;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -140,6 +144,7 @@
             
             /* Dynamic height balancing for ultra short or cramped phone displays */
             max-height: 50vh; 
+            max-height: 50dvh;
             overflow-y: auto; 
             scrollbar-width: none; /* Hides scrollbar for Firefox */
             width: 100%;
@@ -270,12 +275,15 @@
                 padding: 25px 20px;
                 width: 90%;
                 max-height: 68vh;
+                max-height: 68dvh;
                 margin-bottom: 20px; 
             }
             .card-container.is-menu-state {
                 width: 100vw !important;
                 height: 100vh !important;
+                height: 100dvh !important;
                 max-height: 100vh !important;
+                max-height: 100dvh !important;
                 margin-top: 0px;
                 margin-bottom: 0px;
             }
@@ -283,6 +291,7 @@
                 font-size: 1.1rem;
                 min-height: 120px;
                 max-height: 38vh;
+                max-height: 38dvh;
             }
             #story-text.menu-centered {
                 font-size: 2.2rem !important; /* Mobile Title Font Size */
@@ -304,7 +313,7 @@
 
     <!-- Atmospheric Disclaimer Header Row Node - Relocated right above the card container stack -->
     <header id="app-footer" class="site-footer">
-        DISCLAIMER: ALL STORIES ARE FICTIONAL. FOR THE BEST EXPERIENCE, READ ON A PC.
+        Disclaimer: All stories are fictional. For the best experience, read on a computer. You may need to Install Voice Data (download a high-quality or "Enhanced" voice pack) on a phone.
     </header>
 
     <!-- Main Glassmorphism Framework Interface Box (Starts in Fullscreen Centered Menu State) -->
@@ -317,16 +326,6 @@
     </div>
 
     <script>
-        // Token Key map architecture with fully mapped logical emotional variables:
-        // [T] = Story Teller (Female Voice Profile)
-        // [A-NORMAL] = Ben (Male Voice, Base Metrics)
-        // [A-SCARED] = Ben (Male Voice, Shrill Pitch, Rapid Delivery)
-        // [A-CURIOUS] = Ben (Male Voice, Hesitant Tone, Drawn Out Intervals)
-        // [A-SCREAM] = Ben (Male Voice, Maximum Structural Pitch Level, Urgent Rate)
-        // [A-PAIN] = Ben (Male Voice, Low Distorted Pitch, Fragmented Delivery)
-        // [A-SAD] = Ben (Male Voice, Deep Lowered Pitch, Very Slow Depressed Rate)
-        // [A-HAPPY] = Ben (Male Voice, Elevated Bright Pitch, Rhythmic Fast Tempo)
-        // [S] = Sound Effects (Web Audio API Synthesized MIDI Generation Engine)
         const ghostStories = [
             [
                 "[T] The floorboards of Blackwood Manor groaned beneath Ben's weight, bleeding out ancient dust into the freezing twilight air. He gripped his failing flashlight tightly, tracing the strange symbols carved directly into the rotten wood frames.",
@@ -388,10 +387,8 @@
         let isVoiceEnabled = true;
         let hasEntered = false;
         
-        // Single Shared Global Audio Context for synthesis processing
         let audioCtx = null;
 
-        // Optimized Multi-Paragraph Word-by-Word Text Animator (Cleans out voice processing tags before rendering to user screen view)
         function renderAnimatedText(targetStoryArray, alignJustify = false) {
             const container = document.getElementById('story-text');
             container.innerHTML = ""; 
@@ -403,7 +400,6 @@
             }
 
             targetStoryArray.forEach((rawLine, pIndex) => {
-                // Strip out data management tokens via generic regular expression parsing logic
                 const displayLine = rawLine.replace(/^\[[A-Z\-]+\]\s*/, '');
                 
                 const pElement = document.createElement('p');
@@ -435,7 +431,6 @@
             if (hasEntered) return;
             hasEntered = true;
             
-            // Initialize Audio Context safely following user gesture guidelines
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
@@ -446,7 +441,6 @@
             
             mainBox.classList.remove('is-menu-state');
             
-            // Activate disclaimer text view state transition to visible white
             document.getElementById('app-footer').classList.add('active-state');
             
             document.getElementById('action-trigger').style.display = "inline-block";
@@ -479,7 +473,6 @@
             }
         }
 
-        // Low-Fi Retro MIDI/Synth Sound Effects Engine via Web Audio API
         function playMidiSoundEffect(sfxText, callback) {
             if (!isVoiceEnabled || !audioCtx) {
                 if (callback) callback();
@@ -551,13 +544,11 @@
             }, totalDurationMs);
         }
 
-        // Multi-Voice Sequence Processor Engine with Full Emotional Profile Parameters
         function speakSequentialStory(storyArray, currentLineIndex) {
             if (!isVoiceEnabled || currentLineIndex >= storyArray.length) return;
 
             const rawLine = storyArray[currentLineIndex];
             
-            // Structural emotional variant token tracking assignments
             const isTeller = rawLine.startsWith("[T]");
             const isNormal = rawLine.startsWith("[A-NORMAL]");
             const isScared = rawLine.startsWith("[A-SCARED]");
@@ -580,10 +571,8 @@
             const utterance = new SpeechSynthesisUtterance(cleanText);
             const voices = window.speechSynthesis.getVoices();
 
-            // Mobile-Adaptive Multi-Voice Filter Engine Block
             if (voices.length > 0) {
                 if (isTeller) {
-                    // Search for explicit female names across desktop and mobile structures
                     const femaleVoice = voices.find(v => {
                         const name = v.name.toLowerCase();
                         return name.includes('female') || name.includes('zira') || name.includes('google uk english female') || name.includes('hazel') || name.includes('siri') && v.lang.includes('en');
@@ -592,7 +581,6 @@
                     utterance.pitch = 0.95;
                     utterance.rate = 0.75;
                 } else {
-                    // Search for explicit male names across desktop and mobile architectures
                     const maleVoice = voices.find(v => {
                         const name = v.name.toLowerCase();
                         return name.includes('male') || name.includes('david') || name.includes('google uk english male') || name.includes('daniel') || name.includes('ravi') || name.includes('aaron');
@@ -623,7 +611,6 @@
                     }
                 }
             } else {
-                // System fallback loops when local voice profiles return empty vectors
                 if (isTeller) { utterance.pitch = 1.1; utterance.rate = 0.8; }
                 else if (isNormal) { utterance.pitch = 0.7; utterance.rate = 0.85; }
                 else if (isCurios) { utterance.pitch = 0.85; utterance.rate = 0.70; }
