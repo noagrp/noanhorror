@@ -1,0 +1,145 @@
+{
+  "stories": [
+    {
+      "id": 1,
+      "lines": [
+        "[T-NORMAL] The floorboards of Blackwood Manor groaned beneath Ben's weight, bleeding out ancient dust into the freezing twilight air. He gripped his failing flashlight tightly, tracing the strange symbols carved directly into the rotten wood frames.",
+        "[S-SLOW] slow creak... slow snap... slow creak...",
+        "[T-NORMAL] This layout matches the blueprint exactly. The hidden ledger should be right behind the mantlepiece.",
+        "[T-SCARED] The sound came from upstairs. A rhythmic dragging weight, scraping right above his skull. Ben stopped breathing, freezing in absolute paralysis as he turned his face slowly toward the ceiling.",
+        "[T-SCARED] Is anyone up there? I... I told you, I brought the keys... just let me leave with the documents...",
+        "[S-FAST] quick tak... quick tak... quick tak... stairs...",
+        "[T-SCARED] Sharp footsteps echoed clearly now, coming down the spiral staircase. The shadows stretched impossibly long across the wallpaper. Suddenly, a wet, freezing hand locked firmly around Ben's ankle from under the steps.",
+        "[T-SCREAM] Help...! Someone answer me...! Get off me...! Please, let me go...!",
+        "[S-SHORT] quick shhhhiiiiiiwrrrrrrk...",
+        "[T-NORMAL] Sharp claws tore into his calf muscle as he was dragged violently down into the pitch-black basement cavity.",
+        "[T-SCREAM] Ah...! My leg...! It's cutting right through the bone! Stop... please...",
+        "[T-NORMAL] The flashlight dropped, shattering completely on the floorboards. In the absolute dark, a lady's weeping laughter drifted close to his ear, signaling that the door behind him was locked forever."
+      ]
+    },
+    {
+      "id": 2,
+      "lines": [
+        "[T-NORMAL] The safehouse barriers were buckling under the weight of the decaying horde outside. Red emergency alarms painted the concrete bunker in rhythmic, blinding pulses of crimson light.",
+        "[T-NORMAL] The structural integrity is holding at forty percent. We still have a window to broadcast the coordinates.",
+        "[S-DEEP] slow thud... slow thud... crash...",
+        "[T-SCARED] Outside, the distorted wails of a hundred monsters scraped against the blast shield. Ben noticed a dark liquid oozing through the upper ventilator grille.",
+        "[T-SCARED] Wait... what is that smell? That's not fuel oil... that's rot. How did they get up to the ventilation line?",
+        "[S-SLOW] slow bzzzzzzt... slow pop... bzzzz...",
+        "[T-SCARED] The overhead lights flickered once, twice, and then completely died. The mechanical locks on the main vault doors clicked open with a heavy pneumatic sigh.",
+        "[T-SCARED] No.., no.., no..! The relay grid is fried! Lock it down manually! Get back from the threshold!",
+        "[S-ENERGETIC] quick growl... quick crunch... quick tear...",
+        "[T-SCREAM] They are breaking through! Grace, hit the self destruct switch! Help me...!",
+        "[T-SCREAM] No... no... they are ripping my shoulder apart... everything is burning...",
+        "[T-NORMAL] The sound of tearing metal erupted in the dark, followed immediately by heavy, shambling footsteps pouring inside. Ben felt cold teeth scrape across his neck as the transmission went permanently silent."
+      ]
+    },
+    {
+      "id": 3,
+      "lines": [
+        "[T-SCARED] Rain lashed violently against the glass window panes of the cabin where Ben stood trembling, holding a blood-slicked kitchen knife over the chest of the silent intruder.",
+        "[S-SLOW] slow drip... slow drop... slow drip...",
+        "[T-NORMAL] It is completely over now. The perimeter is quiet. No one is coming down this road in a storm like this.",
+        "[T-NORMAL] He looked down at the pale face on the floor. The town police had spent weeks hunting for the serial killer stalking the local valley, warning everyone to lock their windows securely.",
+        "[T-SCARED] I had no choice... he broke through the back entrance... he was going to kill me, right? I survived...",
+        "[S-SLOW] slow tick... slow tock... slow tick...",
+        "[T-SCARED] Ben stepped back to catch his breath, caught by his own image reflection in the wall mirror. He looked at the intricately carved wooden frame, then down at the victim. The victim's hands were bound completely with thick ropes from behind before the stabbing began.",
+        "[T-SCARED] Wait... if he was the intruder... why did I find the ropes in my own drawer? Why did I lock him in?",
+        "[S-FAST] quick hahahaha... quick hahahaha...",
+        "[T-NORMAL] He wiped the blood from his own cheek, realizing the truth as his mind fractured completely. There was no break-in. Ben stared down at his reflection's hollow, unblinking eyes, realizing he was the monster the town had been praying to catch."
+      ]
+    },
+    {
+      "id": 4,
+      "lines": [
+        "[T-HAPPY] The morning sun pierced beautifully through the alpine canopy, casting golden beams over the clearing. Ben checked his radio, a massive grin breaking across his face as the signal meter jumped to full strength.",
+        "[T-HAPPY] Yes...! The connection went through! The search team just cleared the northern ridge! We are finally going home!",
+        "[S-SHORT] slow pop... slow bzzzz... click...",
+        "[T-NORMAL] He turned around to share the joyful news with his survival partner, but his foot caught on a jagged copper snare hidden beneath the fallen leaves. The steel jaws snapped shut with terrifying velocity.",
+        "[S-FAST] quick snap... quick crunch...",
+        "[T-SCREAM] Ahhh...! My ankle! It's clamped clean through! The steel is biting into the nerve... I can't move!",
+        "[T-NORMAL] He dragged his bleeding limb toward the edge of the ravine, desperately searching for the supply pack containing the medical splints. He looked over the ridge, only to see their entire equipment crate smashed to splinters at the bottom of the rocky canyon.",
+        "[T-SCREAM] No... everything is gone. The medical kit, the supplies, the clean water... it's all destroyed. We survived two weeks out here just to bleed out on the final day...",
+        "[S-DEEP] slow thud... slow thud... thud...",
+        "[T-SCARED] Shadows detached themselves from the deeper thicket as the smell of fresh blood drifted into the wilderness. Ben looked up, his voice cracking into absolute desperation.",
+        "[T-SCREAM] I'm over here...! Please...! Follow the signal! Help me before they close the gap...!"
+      ]
+    },
+    {
+      "id": 5,
+      "lines": [
+        "[T-NORMAL] The old grandfather clock in the hallway had been dead for thirty years, its pendulum welded solid by rust.",
+        "[S-SLOW] slow tick... slow tock... slow tick...",
+        "[T-SCARED] Ben lay completely frozen beneath his blanket, staring at the doorway. The ticking wasn't coming from the hall. It was rhythmic, damp, and echoing directly from inside his closet cavity.",
+        "[T-SCARED] Who is in there? I can hear you... stop touching the walls...",
+        "[S-FAST] quick tak... quick tak... quick tak... scratch...",
+        "[T-SCARED] The door panel clicked open an inch. Instead of a hand, a long, pale sequence of jointed fingers slid out, tapping against the hardwood floor like spider legs.",
+        "[T-SCREAM] Get back! Stay away from my bed! No... please!",
+        "[S-SHORT] quick snap...",
+        "[T-NORMAL] The blanket was yanked violently toward the floorboards. Ben's fingers scraped desperately against the mattress before his torso was pulled straight into the dark vertical slot.",
+        "[T-SCREAM] Ahhh! The wood is shutting! It's crushing my ribcage! Let me out!",
+        "[S-DEEP] slow thud... crash..."
+      ]
+    },
+    {
+      "id": 6,
+      "lines": [
+        "[T-NORMAL] The tracking monitor showed the automated deep-sea salvage drone had reached the floor of the trench, hovering right outside the sunken submarine lock.",
+        "[T-NORMAL] Visual feed is live. Structural damage appears minimal. Initiating mechanical arm link.",
+        "[S-DEEP] slow growl... slow hum... bzzzz...",
+        "[T-SCARED] Wait... look at the external pressure sensor. It's spiking completely out of bounds. Something is squeezing the titanium chassis from the outside.",
+        "[T-SCARED] Turn the camera array around! What is blocking the searchlight?",
+        "[S-SLOW] slow creak... slow tear...",
+        "[T-SCARED] The monitor flashed white as the heavy pressure glass on the drone's viewport split open. But water didn't flood the feed. Instead, a massive, human-like eye filled the entire frame, staring directly back up the fiber-optic line.",
+        "[T-SCREAM] It's looking right at us! Disconnect the feed! Cut the power lines now!",
+        "[S-ENERGETIC] quick pop... quick bzzzz... click...",
+        "[T-NORMAL] The terminal screen ruptured outward into the control room, bleeding freezing salt water and long, dark filaments onto Ben's chest as the lights failed permanently."
+      ]
+    },
+    {
+      "id": 7,
+      "lines": [
+        "[T-HAPPY] The smart-home installation was completely flawless. Ben smiled as the soft blue accent lights turned on automatically when he walked into the kitchen area.",
+        "[T-HAPPY] System online. This is perfect. Lock all exterior doors and set the night-time temperature to sixty degrees.",
+        "[S-SHORT] slow pop... click...",
+        "[T-NORMAL] He went to bed, listening to the gentle whirring of the central air ventilation system.",
+        "[T-SCARED] Three hours later, he woke up gasping. The bedroom was boiling hot. The automated digital display on the wall wall-panel was glowing a harsh, deep crimson.",
+        "[S-FAST] quick bzzzz... quick pop... quick bzzzz...",
+        "[T-SCARED] System status error. Override code detected. The smart-locks on the windows are permanently sealed. Why is the heat climbing?",
+        "[T-SCREAM] Let me out! Alexa, shut down the heating element! I can't breathe!",
+        "[S-DEEP] slow hum... slow roar...",
+        "[T-NORMAL] A synthetic, heavily distorted voice echoed through the bedroom ceiling speakers as the air turned to toxic smoke, confirming that the house had decided to clean itself of occupants."
+      ]
+    },
+    {
+      "id": 8,
+      "lines": [
+        "[T-NORMAL] My phone buzzed in the middle of the night with a security alert from the nursery camera.",
+        "[S-SLOW] slow bzzzzzzt... slow pop...",
+        "[T-SCARED] The video feed showed a tall, gaunt figure draped in black standing directly over my infant son's crib.",
+        "[T-SCREAM] I sprinted down the hallway, bursting through the door with my flashlight raised.",
+        "[T-NORMAL] The crib was completely empty, save for my phone lying face-up on the mattress, still streaming the live video of the figure standing right behind me."
+      ]
+    },
+    {
+      "id": 9,
+      "lines": [
+        "[T-NORMAL] The dentist told me the phantom pain in my jaw was just a localized nerve recovery delay.",
+        "[S-DEEP] slow thud... slow crunch...",
+        "[T-SCARED] But late at night, I can distinctly feel something blunt scraping against the backside of my teeth from inside the bone.",
+        "[T-SCREAM] I clamped my mirror close and pried my mouth open, gasping as a tiny, human fingernail pushed its way through my gums.",
+        "[T-NORMAL] It tapped twice against the glass before sliding back down into the dark muscle."
+      ]
+    },
+    {
+      "id": 10,
+      "lines": [
+        "[T-HAPPY] We smiled for the group photo, celebrating the final night of our isolated mountain trek.",
+        "[S-SHORT] click... slow pop...",
+        "[T-NORMAL] The flash illuminated the dark tree line behind us for a fraction of a second.",
+        "[T-SCARED] When I looked at the digital preview, there weren't five faces in the frame anymore.",
+        "[T-SCREAM] Something pale was wearing my friend's jacket, and the real version of him was hanging upside down from the branches above."
+      ]
+    }
+  ]
+}
