@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noan's Favorite Stories // Enter</title>
     <style>
         /* Base Pure Dark Atmosphere */
@@ -12,10 +12,11 @@
             font-family: 'Georgia', serif;
             margin: 0;
             padding: 0;
-            height: 100vh;
-            width: 100vw;
+            min-height: 100vh;
             max-width: 100vw; /* Locks horizontal boundaries strictly to the device hardware */
             contain: paint;   /* Prevents floating entities from pulling or expanding the layout */
+            /* Mobile-Safe Viewport calculation framework */
+            min-height: -webkit-fill-available;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,14 +26,18 @@
             -webkit-user-select: none;
         }
 
-        /* Fixed Audio Panel - Forcibly Locked to the TOP RIGHT of the screen */
+        html {
+            height: -webkit-fill-available;
+        }
+
+        /* Fixed Audio Panel - Moved and Locked to Top Right Permanently */
         .audio-controls {
             position: fixed;
-            top: 25px !important;
-            right: 25px !important;
+            top: 20px !important;
+            right: 20px !important;
             bottom: auto !important;
             left: auto !important;
-            z-index: 9999 !important; /* Forces it to stay on top of everything */
+            z-index: 30; /* Increased z-index to stay unconditionally above all UI elements */
             display: flex;
             gap: 15px;
         }
@@ -48,7 +53,7 @@
             font-size: 0.7rem;
             letter-spacing: 1px;
             transition: color 0.3s ease;
-            padding: 10px; /* Bigger touch target for mobile phones */
+            padding: 0;
             margin: 0;
             -webkit-appearance: none;
             appearance: none;
@@ -77,7 +82,7 @@
             align-items: center;
             
             /* Safe Height boundaries preventing viewport breakage on short devices */
-            max-height: 80vh;
+            max-height: 85vh;
             
             /* Glassmorphism Effect Rules */
             background: rgba(255, 255, 255, 0.02) !important;
@@ -124,7 +129,7 @@
             min-height: 140px;
             
             /* Dynamic height balancing for ultra short or cramped phone displays */
-            max-height: 50vh; 
+            max-height: 55vh; 
             overflow-y: auto; 
             scrollbar-width: none; /* Hides scrollbar for Firefox */
             width: 100%;
@@ -217,24 +222,28 @@
         /* Mobile and Landscape Short Screen Optimizations */
         @media (max-width: 580px), (max-height: 600px) {
             .audio-controls {
-                top: 20px !important;
-                right: 20px !important;
+                top: 12px !important;
+                right: 12px !important;
             }
             .card-container {
                 padding: 25px 20px;
                 width: 90%;
+                /* Restricting max height further on tiny devices to absolute 75vh to clear top-right space securely */
                 max-height: 75vh;
-                margin-bottom: 0px;
+                margin-top: 40px; /* Generates physical buffer spacing protecting the top control rows */
+                margin-bottom: 20px;
             }
             .card-container.is-menu-state {
                 width: 100vw !important;
                 height: 100vh !important;
                 max-height: 100vh !important;
+                margin-top: 0px;
+                margin-bottom: 0px;
             }
             #story-text {
                 font-size: 1.1rem;
                 min-height: 120px;
-                max-height: 42vh;
+                max-height: 44vh;
             }
             #story-text.menu-centered {
                 font-size: 2.2rem !important; /* Mobile Title Font Size */
@@ -264,54 +273,82 @@
     </div>
 
     <script>
+        // Token Key map architecture with fully mapped logical emotional variables:
+        // [T] = Story Teller (Female Voice Profile)
+        // [A-NORMAL] = Ben (Male Voice, Base Metrics)
+        // [A-SCARED] = Ben (Male Voice, Shrill Pitch, Rapid Delivery)
+        // [A-CURIOUS] = Ben (Male Voice, Hesitant Tone, Drawn Out Intervals)
+        // [A-SCREAM] = Ben (Male Voice, Maximum Structural Pitch Level, Urgent Rate)
+        // [A-PAIN] = Ben (Male Voice, Low Distorted Pitch, Fragmented Delivery)
+        // [A-SAD] = Ben (Male Voice, Deep Lowered Pitch, Very Slow Depressed Rate)
+        // [A-HAPPY] = Ben (Male Voice, Elevated Bright Pitch, Rhythmic Fast Tempo)
+        // [S] = Sound Effects (Web Audio API Synthesized MIDI Generation Engine)
         const ghostStories = [
-            "The scratching inside my bedroom wall always started at exactly 3:14 AM. I tried convincing myself it was just mice navigating the old insulation, trying desperately to block out the rhythmic, agonizing sound. But mice don't breathe with a wet, ragged rattle, and mice certainly don't whisper your name through the electrical outlets when the lights go out.\n\nLast night, the scratching stopped abruptly, plunging the room into a suffocating, absolute silence. I lay paralyzed in the dark, my heart hammering against my ribs as a cold, foul-smelling draft swept across my face. Slowly, the darkness in the corner of my ceiling began to detach itself, stretching downward toward my bed.\n\nThat's when I realized the scratching hadn't stopped because whatever it was gave up. It stopped because it finally found the way out.",
-
-            "My smart-home camera app sent a notification to my phone while I was working late at the office: 'Movement detected in Master Bedroom.' Shrugging it off as a glitch, I opened the live video feed expecting to see an empty room. Instead, the night-vision camera showed a tall, gaunt figure draped in a soiled white sheet, standing perfectly still over my sleeping dog.\n\nI watched in absolute horror as the figure slowly turned its head directly toward the camera lens, as if it knew I was watching from miles away. It raised a long, skeletal finger to its gray, fleshless lips, whispering a chilling command that somehow crackled through my phone's speaker.\n\n'Hurry home,' the voice rasped, right before the feed went completely black.",
-
-            "Growing up with an identical twin meant never truly feeling alone in our old, creaking country house. Even after Sarah tragically passed away in the lake that summer, I could still hear her soft footsteps pacing the upstairs hallway at night. I found comfort in her residual presence, believing she was watching over me.\n\nBut comfort turned to sheer terror this morning when I looked into the bathroom mirror to brush my teeth. My reflection didn't mimic my movements; instead, it stood perfectly still, eyes hollow and sunken, skin bloated and dripping with dark, stagnant lake water.\n\nShe leaned close to the glass, her wet lips forming words that chilled my soul: 'You promised we would share everything. It's your turn to drown.'",
-
-            "The insomnia clinic promised that their new experimental sleep tracking app would revolutionize how I rested. It required placing my phone face-up on the nightstand, allowing the front camera to monitor my micro-expressions during the rapid eye movement phase.\n\nOn the third night, I woke up around 2:00 AM feeling an unnatural, heavy weight pressing firmly down on my chest. I couldn't move a single muscle, trapped entirely in the clutches of sleep paralysis while my breathing grew shallow and panicked.\n\nThe next morning, I opened the app to review the recorded nighttime time-lapse data. The video showed me sleeping peacefully until midnight, when a pale, hairless face slowly crawled out from beneath my bed, smiled directly into the camera, and sat heavily on my chest until dawn.",
-
-            "I bought an antique hand mirror at a secluded estate sale down in the valley, enchanted by its intricate, tarnished silver frame. The old woman selling it refused to look at the glass, locking it in a velvet box and warning me never to clean it after midnight.\n\nNaturally, curiosity got the best of me, and at 1:00 AM I began wiping away decades of thick dust and grime. As the glass cleared, I realized the room reflected behind me wasn't my bedroom at all, but a dark, stone basement lined with rusted chains.\n\nI spun around around frantically, but my bedroom was completely normal. When I looked back at the mirror, a shadowy figure was standing right behind my reflection, wrapping its cold, black hands around my throat in the glass while I began to choke in real life.",
-
-            "The dentist insisted the persistent, agonizing phantom pain in my lower jaw was simply nerve damage from a recent wisdom tooth extraction. He prescribed heavy painkillers and told me to rest, assuring me the throbbing sensation would fade within a few days.\n\nBut tonight, the pain transformed into a sharp, rhythmic scratching sensation deep within my gums. I rushed to the bathroom, grabbed a pair of tweezers, and pried open my mouth under the harsh fluorescent light to investigate the wound.\n\nTucking the metal tip into the raw incision, I didn't find a forgotten bone fragment or root. I gripped something hard and pulled, watching in absolute horror as a long, thick strand of coarse, black hair uncoiled from deep inside my jaw, followed by a tiny, wet voice whispering, 'Thank you for letting me out.'",
-
-            "I found a cheap, beautifully preserved baby monitor at a local garage sale to keep an eye on my new golden retriever puppy overnight. I set the camera up in the kitchen and kept the audio receiver on my nightstand, falling asleep to the gentle sounds of his soft breathing.\n\nAt roughly 3:00 AM, a low, crackling static woke me from a deep slumber. Through the speaker, I could hear my puppy whimpering low in terror, backed by the heavy, rhythmic scraping of something dragging itself across the hardwood floor.\n\nBefore I could get out of bed, a dry, raspy voice hissed into the microphone, right next to the whimpering dog: 'Don't come downstairs. I'm teaching him how to growl your name.'",
-
-            "There is a deep, jagged scratch mark on the inside of my basement door that seems to grow a few millimeters longer every single day. I blamed it on the house settling or old wood warping, trying desperately to ignore the mathematical precision of the expanding groove.\n\nYesterday afternoon, the mark finally reached all the way down to the heavy brass lock mechanism. I stared at it for an hour, a knot of unease tightening in my stomach, before double-checking the deadbolt and heading up to bed.\n\nThis morning, I woke up to a freezing cold draft licking at my ankles. I walked into the hallway and froze: the basement door was standing wide open, and a trail of wet, muddy footprints led directly into my bedroom closet.",
-
-            "I have always loved looking at old, black-and-white panoramic photos of crowded city streets from the early 1900s, fascinated by the forgotten lives of the people captured in time. Last week, I bought a sprawling 1924 photograph of a bustling London market to hang in my study.\n\nWhile examining the details with a magnifying glass, my heart stopped when I noticed a pale, hollow-eyed face standing completely still in the background crowd, staring directly at the camera with a sinister grin.\n\nYesterday, I bought another photo from a completely different shop, this one taken in New York in 1948. Shaking, I looked at the far left edge of the frame, only to find the exact same pale, unblinking face smiling back at me, holding a sign that read: 'I'm getting closer.'",
-
-            "My wife woke me up in the dead of night to complain that the old radiator in the corner of our room was making a strange, metallic clanking sound again. Groaning, I rolled over and reached out under the heavy blanket to pat her leg, telling her I'd fix it first thing in the morning.\n\nMy hand brushed against her skin under the covers, but it felt terribly wrong—shockingly icy, wet, and completely rigid, like meat left too long in a freezer. I stiffened, my breath catching in my throat as a wave of primitive dread washed over me.\n\nRight then, the master bedroom door slowly creaked open, and my wife stepped into the room from the brightly lit hallway, rubbing her eyes and whispering, 'Honey, did you hear that noise too?'",
-
-            "I fell asleep on the late-night commuter train and woke up completely alone, sitting at a pitch-black, abandoned underground platform. The train doors were stuck wide open, casting a dim, flickering fluorescent light onto the dirty concrete outside.\n\nI stepped onto the platform, the echo of my boots sounding terrifyingly loud in the cavernous silence. As I looked around for an exit sign, the station's ancient emergency intercom suddenly crackled to life with a loud, piercing shriek.\n\nA wet, gargling voice boomed over the speakers, echoing off the tiled walls: 'The last train has departed. The feast has begun.' From the darkness of the tracks behind me, hundreds of pale, elongated hands began spilling over the edge.",
-
-            "The digital clock on my nightstand has been frozen at precisely 3:13 AM for three consecutive days. No matter how many hours I spend watching the sun rise and set outside, the glowing red numbers refuse to change, trapped in a permanent loop.\n\nI tried unplugging it, but the red display remained lit, burning into the darkness of my room. When I went to throw it in the trash, I noticed the window glass looked strange, warped and completely black despite it being noon.\n\nI tapped the window pane, and it didn't sound like glass—it sounded like solid iron. I looked out, only to realize the sun hadn't risen at all; the world outside had simply been replaced by an infinite, silent void.",
-
-            "I always thought the faint, rhythmic whispering sound in my apartment was just the autumn wind passing through the old, cracked window frames. I grew used to it, letting the soft murmur lull me to sleep on lonely winter nights.\n\nTonight, however, the air was completely still, but the whispering grew significantly louder, vibrating directly through the wooden floorboards beneath my feet. I knelt down, pressing my ear tightly against the floor to finally understand the words.\n\nIt wasn't a random murmur at all. A thin, breathless voice was repeating a single, terrifying instruction: 'Don't look at the ceiling, I'm already upside down.'",
-
-            "The custom-built grandfather clock I inherited from my eccentric grandfather was famous for its perfect, unyielding accuracy. It had chimed every single hour for fifty years without a single delay, a masterpiece of mechanical engineering.\n\nBut tonight, as the hands crept toward midnight, the clock didn't strike twelve times. It struck thirteen, each metallic ring sounding deeper, heavier, and more distorted than the last, vibrating through the structural beams of the house.\n\nWith the final, impossible chime, the regular ticking stopped entirely. In the absolute silence that followed, I heard the heavy wooden door of the clock frame slowly unlatch from the inside, accompanied by the wet thud of something heavy stepping out onto the floor.",
-
-            "My daughter has an imaginary friend named 'The Long Man' who she claims lives in the crawlspace beneath her bedroom closet. I laughed it off as a normal childhood phase, telling her that monsters weren't real and couldn't hurt her.\n\nThis evening, I went into her room to clean up her toys and noticed her closet door was standing slightly ajar. I reached in to shut it, but my hand caught on something hanging from the top shelf.\n\nIt was a hand-drawn picture my daughter had made earlier that day. It depicted our family sleeping in our beds, with a massive, multi-jointed creature winding its way out of the closet, its face inches from mine, captioned: 'He likes you best.'",
-
-            "The old highway route through the blackwood pine forest was completely abandoned after midnight, devoid of any streetlights or passing cars. I rolled down my driver's side window to let the crisp night air keep me awake during the long drive home.\n\nSuddenly, my headlights caught a figure standing right in the middle of the dark road ahead. I slammed on the brakes, my tires screeching violently as the car skidded to a halt just inches away from a pale, naked woman.\n\nShe didn't move or blink, her eyes entirely hollow and pitch black. Before I could shift into reverse, the car's internal lock buttons all clicked down simultaneously, and the radio began violently looping a manic, high-pitched scream.",
-
-            "I bought a vintage polaroid camera at a local thrift store, eager to capture some artistic, retro photos of my apartment. I loaded a fresh pack of film, pointed the lens toward my empty living room couch, and snapped a test picture.\n\nAs the white chemical square slowly developed in the light, a dark shape began to materialize on the cushions. It wasn't empty at all; the photo clearly showed a mangled, faceless corpse sitting on my couch, staring directly at me.\n\nMy breath hitched as I looked up at the actual couch, seeing nothing but clean fabric. I took another photo, and when it developed, the corpse was standing up, right in front of the lens, its rotting fingers reaching out of the frame.",
-
-            "The hotel room was cheap, clean, and completely unremarkable, perfect for a single night's stay during my cross-country business trip. The only unusual detail was a tiny, covered peephole drilled into the shared wall between my room and the next.\n\nCuriosity flared around 1:00 AM when I heard a strange, rhythmic wet tapping sound coming from the other side of the wall. I stepped up to the hole, slid the small metal cover aside, and pressed my eye tightly against the opening to peer through.\n\nEverything in the next room was completely red, a deep, saturated crimson color that blurred all structural shapes. Confused, I asked the front desk clerk about the neighbor the next morning; he went pale and whispered, 'That room is locked. The man who died in there had solid red eyes.'",
-
-            "My smartphone began ringing from the kitchen counter at exactly 3:33 AM, flashing an unknown, heavily scrambled number across the screen. I stumbled out of bed, rubbed my eyes, and answered it, assuming it was an emergency call from family.\n\nThere was no voice on the other end, just the sound of heavy, panicked breathing mixed with the loud, unmistakable mechanical hum of my own refrigerator. I froze, a sudden spike of absolute adrenaline turning my blood to ice.\n\nI slowly looked down at the phone screen in my hand, my eyes widening as I read the incoming caller ID metadata that the system had finally managed to decode: it was a call originating directly from my own phone number.",
-
-            "While restoring a crumbling, 19th-century oil portrait I found in my grandfather's attic, I noticed a strange lump behind the canvas. Carefully cutting away the old backing paper, I discovered a hidden velvet pouch containing a single lock of coarse, human hair.\n\nI pulled the hair out to examine it under the light, only to feel a sudden, agonizing burning sensation flare up across my own scalp. Gasping for air, I rushed to the mirror and watched in sheer horror as my own hair began falling out in thick, bloody clumps.\n\nBeneath the missing patches, the skin of my skull was rapidly darkening, forming the distinct, hand-painted brushstrokes of the old portrait's cursed face."
+            [
+                "[T] The floorboards of Blackwood Manor groaned beneath Ben's weight, bleeding out ancient dust into the freezing twilight air. He gripped his failing flashlight tightly, tracing the strange symbols carved directly into the rotten wood frames.",
+                "[S] Creak... snap... creak...",
+                "[A-NORMAL] This layout matches the blueprint exactly. The hidden ledger should be right behind the mantlepiece.",
+                "[T] The sound came from upstairs. A rhythmic dragging weight, scraping right above his skull. Ben stopped breathing, freezing in absolute paralysis as he turned his face slowly toward the ceiling.",
+                "[A-CURIOUS] Is anyone up there? I... I told you, I brought the keys... just let me leave with the documents...",
+                "[S] Tak... tak... tak...",
+                "[T] Sharp footsteps echoed clearly now, coming down the spiral staircase. The shadows stretched impossibly long across the wallpaper. Suddenly, a wet, freezing hand locked firmly around Ben's ankle from under the steps.",
+                "[A-SCREAM] Help! Someone answer me! Get off me! Please, let me go!",
+                "[S] Shhhhiiiiiiwrrrrrrk...",
+                "[T] Sharp claws tore into his calf muscle as he was dragged violently down into the pitch-black basement cavity.",
+                "[A-PAIN] 2:13 PM 5/17/2026My leg! It's cutting right through the bone! Stop... please...",
+                "[T] The flashlight dropped, shattering completely on the floorboards. In the absolute dark, a lady's weeping laughter drifted close to his ear, signaling that the door behind him was locked forever."
+            ],
+            [
+                "[T] The safehouse barriers were buckling under the weight of the decaying horde outside. Red emergency alarms painted the concrete bunker in rhythmic, blinding pulses of crimson light.",
+                "[A-NORMAL] The structural integrity is holding at forty percent. We still have a window to broadcast the coordinates.",
+                "[S] Thud... thud... crash...",
+                "[T] Outside, the distorted wails of a hundred monsters scraped against the blast shield. Ben noticed a dark liquid oozing through the upper ventilator grille.",
+                "[A-CURIOUS] Wait... what is that smell? That's not fuel oil... that's rot. How did they get up to the ventilation line?",
+                "[S] Bzzzzzzt... pop... bzzzz...",
+                "[T] The overhead lights flickered once, twice, and then completely died. The mechanical locks on the main vault doors clicked open with a heavy pneumatic sigh.",
+                "[A-SCARED] No, no, no! The relay grid is fried! Lock it down manually! Get back from the threshold!",
+                "[S] Growl... crunch... tear...",
+                "[T] The reinforced iron mesh split apart. Shambling figures dropped from the ceiling, landing squarely on Ben's shoulders and clamping their teeth into his collarbone.",
+                "[A-SCREAM] They are breaking through! Grace, hit the self destruct switch! Help me!",
+                "[A-PAIN] No... no... they are ripping my shoulder apart... everything is burning...",
+                "[T] The sound of tearing metal erupted in the dark, followed immediately by heavy, shambling footsteps pouring inside. Ben felt cold teeth scrape across his neck as the transmission went permanently silent."
+            ],
+            [
+                "[T] Rain lashed violently against the glass window panes of the cabin where Ben stood trembling, holding a blood-slicked kitchen knife over the chest of the silent intruder.",
+                "[S] Drip... drop... drip...",
+                "[A-NORMAL] It is completely over now. The perimeter is quiet. No one is coming down this road in a storm like this.",
+                "[T] He looked down at the pale face on the floor. The town police had spent weeks hunting for the serial killer stalking the local valley, warning everyone to lock their windows securely.",
+                "[A-CURIOUS] I had no choice... he broke through the back entrance... he was going to kill me, right? I survived...",
+                "[S] Tick... tock... tick...",
+                "[T] Ben stepped back to catch his breath, caught by his own image reflection in the wall mirror. He looked at the intricately carved wooden frame, then down at the victim. The victim's hands were bound completely with thick ropes from behind before the stabbing began.",
+                "[A-SCARED] Wait... if he was the intruder... why did I find the ropes in my own drawer? Why did I lock him in?",
+                "[S] Hahahaha... hahahaha...",
+                "[T] He wiped the blood from his own cheek, realizing the truth as his mind fractured completely. There was no break-in. Ben stared down at his reflection's hollow, unblinking eyes, realizing he was the monster the town had been praying to catch."
+            ],
+            [
+                "[T] The morning sun pierced beautifully through the alpine canopy, casting golden beams over the clearing. Ben checked his radio, a massive grin breaking across his face as the signal meter jumped to full strength.",
+                "[A-HAPPY] Yes! The connection went through! The search team just cleared the northern ridge! We are finally going home!",
+                "[S] Pop... bzzzz... click...",
+                "[T] He turned around to share the joyful news with his survival partner, but his foot caught on a jagged copper snare hidden beneath the fallen leaves. The steel jaws snapped shut with terrifying velocity.",
+                "[S] Snap... crunch...",
+                "[A-PAIN] Ahhh! My ankle! It's clamped clean through! The steel is biting into the nerve... I can't move!",
+                "[T] He dragged his bleeding limb toward the edge of the ravine, desperately searching for the supply pack containing the medical splints. He looked over the ridge, only to see their entire equipment crate smashed to splinters at the bottom of the rocky canyon.",
+                "[A-SAD] No... everything is gone. The medical kit, the supplies, the clean water... it's all destroyed. We survived two weeks out here just to bleed out on the final day...",
+                "[S] Thud... thud... thud...",
+                "[T] Shadows detached themselves from the deeper thicket as the smell of fresh blood drifted into the wilderness. Ben looked up, his voice cracking into absolute desperation.",
+                "[A-SCREAM] I'm over here! Please! Follow the signal! Help me before they close the gap!"
+            ]
         ];
 
         let unreadStories = [];
         let isVoiceEnabled = true;
         let hasEntered = false;
+        
+        // Single Shared Global Audio Context for synthesis processing
+        let audioCtx = null;
 
-        // Optimized Multi-Paragraph Word-by-Word Text Animator
-        function renderAnimatedText(targetText, alignJustify = false) {
+        // Optimized Multi-Paragraph Word-by-Word Text Animator (Cleans out voice processing tags before rendering to user screen view)
+        function renderAnimatedText(targetStoryArray, alignJustify = false) {
             const container = document.getElementById('story-text');
             container.innerHTML = ""; 
             
@@ -321,15 +358,15 @@
                 container.classList.add('menu-centered');
             }
 
-            // Split whole string into array blocks by checking double breaks
-            const paragraphs = targetText.split('\n\n');
-
-            paragraphs.forEach((paraText, pIndex) => {
+            targetStoryArray.forEach((rawLine, pIndex) => {
+                // Strip out data management tokens via generic regular expression parsing logic
+                const displayLine = rawLine.replace(/^\[[A-Z\-]+\]\s*/, '');
+                
                 const pElement = document.createElement('p');
                 pElement.style.margin = "0 0 1.5rem 0"; 
-                if (pIndex === paragraphs.length - 1) pElement.style.margin = "0"; 
+                if (pIndex === targetStoryArray.length - 1) pElement.style.margin = "0"; 
                 
-                const words = paraText.split(' ');
+                const words = displayLine.split(' ');
 
                 words.forEach((word, index) => {
                     const wordSpan = document.createElement('span');
@@ -354,6 +391,11 @@
             if (hasEntered) return;
             hasEntered = true;
             
+            // Initialize Audio Context safely following user gesture guidelines
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
             const mainBox = document.getElementById('main-frame-box');
             mainBox.style.cursor = "default";
             mainBox.removeAttribute('onclick');
@@ -377,35 +419,177 @@
             }
 
             const randomIndex = Math.floor(Math.random() * unreadStories.length);
-            const chosenStory = unreadStories.splice(randomIndex, 1)[0];
+            const chosenStoryArray = unreadStories.splice(randomIndex, 1)[0];
 
-            renderAnimatedText(chosenStory, true);
+            renderAnimatedText(chosenStoryArray, true);
             
             if (unreadStories.length === 0) {
                 actionBtn.innerText = "Read";
             }
             
             if (isVoiceEnabled) {
-                speakStory(chosenStory);
+                speakSequentialStory(chosenStoryArray, 0);
             }
         }
 
-        function speakStory(textToSpeak) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(textToSpeak);
-                const voices = window.speechSynthesis.getVoices();
+        // Low-Fi Retro MIDI/Synth Sound Effects Engine via Web Audio API
+        function playMidiSoundEffect(sfxText, callback) {
+            if (!isVoiceEnabled || !audioCtx) {
+                if (callback) callback();
+                return;
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const cleaned = sfxText.toLowerCase().replace(/[^a-z. ]/g, '');
+            const beats = cleaned.split(/\s+|\.\.\.+/).filter(b => b.trim().length > 0);
+            
+            let startTime = audioCtx.currentTime + 0.05;
+            const beatDuration = 0.35; 
+
+            beats.forEach((beat) => {
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
                 
-                if (voices.length > 0) {
-                    const maleVoice = voices.find(voice => voice.name.toLowerCase().includes('male') || voice.name.toLowerCase().includes('google uk english male'));
-                    if (maleVoice) utterance.voice = maleVoice;
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                let frequency = 90; 
+                let type = 'square'; 
+                let duration = 0.15;
+
+                if (beat.includes('tak') || beat.includes('tick') || beat.includes('tock') || beat.includes('snap')) {
+                    frequency = beat.includes('tick') ? 180 : 110;
+                    type = 'square';
+                    duration = 0.04; 
+                } else if (beat.includes('creak') || beat.includes('shhh') || beat.includes('shwrrk')) {
+                    frequency = 75;
+                    type = 'sawtooth';
+                    duration = 0.3; 
+                } else if (beat.includes('thud') || beat.includes('crash') || beat.includes('growl') || beat.includes('crunch') || beat.includes('tear')) {
+                    frequency = 55; 
+                    type = 'sawtooth';
+                    duration = 0.25;
+                } else if (beat.includes('bzzz') || beat.includes('pop')) {
+                    frequency = 130;
+                    type = 'triangle';
+                    duration = 0.2;
+                } else if (beat.includes('hahaha')) {
+                    frequency = 65;
+                    type = 'sawtooth';
+                    duration = 0.12;
                 }
 
-                utterance.pitch = 0.3; 
-                utterance.rate = 0.68;  
-                utterance.volume = 1.0; 
+                osc.type = type;
+                osc.frequency.setValueAtTime(frequency, startTime);
+                
+                if (type === 'sawtooth') {
+                    osc.frequency.exponentialRampToValueAtTime(frequency - 20, startTime + duration);
+                }
 
-                window.speechSynthesis.speak(utterance);
+                gainNode.gain.setValueAtTime(0.12, startTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+                osc.start(startTime);
+                osc.stop(startTime + duration);
+
+                startTime += beatDuration;
+            });
+
+            const totalDurationMs = ((startTime - audioCtx.currentTime) * 1000) + 100;
+            setTimeout(() => {
+                if (callback) callback();
+            }, totalDurationMs);
+        }
+
+        // Multi-Voice Sequence Processor Engine with Full Emotional Profile Parameters
+        function speakSequentialStory(storyArray, currentLineIndex) {
+            if (!isVoiceEnabled || currentLineIndex >= storyArray.length) return;
+
+            const rawLine = storyArray[currentLineIndex];
+            
+            // Structural emotional variant token tracking assignments
+            const isTeller = rawLine.startsWith("[T]");
+            const isNormal = rawLine.startsWith("[A-NORMAL]");
+            const isScared = rawLine.startsWith("[A-SCARED]");
+            const isCurios = rawLine.startsWith("[A-CURIOUS]");
+            const isScream = rawLine.startsWith("[A-SCREAM]");
+            const isPain = rawLine.startsWith("[A-PAIN]");
+            const isSad = rawLine.startsWith("[A-SAD]");
+            const isHappy = rawLine.startsWith("[A-HAPPY]");
+            const isSFX = rawLine.startsWith("[S]");
+            
+            const cleanText = rawLine.replace(/^\[[A-Z\-]+\]\s*/, '');
+
+            if (isSFX) {
+                playMidiSoundEffect(cleanText, () => {
+                    speakSequentialStory(storyArray, currentLineIndex + 1);
+                });
+                return;
             }
+
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            const voices = window.speechSynthesis.getVoices();
+
+            // Setup granular character modulation matrix mappings
+            if (voices.length > 0) {
+                if (isTeller) {
+                    const femaleVoice = voices.find(v => v.name.toLowerCase().includes('female') || v.name.toLowerCase().includes('zira') || v.name.toLowerCase().includes('google uk english female') || v.name.toLowerCase().includes('hazel'));
+                    if (femaleVoice) utterance.voice = femaleVoice;
+                    utterance.pitch = 0.95;
+                    utterance.rate = 0.75;
+                } else {
+                    const maleVoice = voices.find(v => v.name.toLowerCase().includes('male') || v.name.toLowerCase().includes('david') || v.name.toLowerCase().includes('google uk english male') || v.name.toLowerCase().includes('ravi'));
+                    if (maleVoice) utterance.voice = maleVoice;
+                    
+                    if (isNormal) {
+                        utterance.pitch = 0.65;
+                        utterance.rate = 0.82;
+                    } else if (isCurios) {
+                        utterance.pitch = 0.78; // Higher questioning shift
+                        utterance.rate = 0.68;  // Deliberate hesitant pause cadence
+                    } else if (isScared) {
+                        utterance.pitch = 1.15; // Throat contraction simulation
+                        utterance.rate = 1.12;  // Accelerated delivery
+                    } else if (isScream) {
+                        utterance.pitch = 1.45; // Maximum structural engine limit
+                        utterance.rate = 1.25;  // Rapid desperate phrasing
+                    } else if (isPain) {
+                        utterance.pitch = 0.45; // Low guttural trauma vibration
+                        utterance.rate = 0.55;  // Heavy breaking intervals
+                    } else if (isSad) {
+                        utterance.pitch = 0.35; // Profound sorrow drop
+                        utterance.rate = 0.50;  // Lethargic cadence
+                    } else if (isHappy) {
+                        utterance.pitch = 0.90; // Elevated energetic profile
+                        utterance.rate = 0.95;  // Enthusiastic rhythmic pacing
+                    }
+                }
+            } else {
+                // System fallback loops when local voice profiles return empty vectors
+                if (isTeller) { utterance.pitch = 1.1; utterance.rate = 0.8; }
+                else if (isNormal) { utterance.pitch = 0.7; utterance.rate = 0.85; }
+                else if (isCurios) { utterance.pitch = 0.85; utterance.rate = 0.70; }
+                else if (isScared) { utterance.pitch = 1.3; utterance.rate = 1.10; }
+                else if (isScream) { utterance.pitch = 1.6; utterance.rate = 1.30; }
+                else if (isPain) { utterance.pitch = 0.4; utterance.rate = 0.60; }
+                else if (isSad) { utterance.pitch = 0.3; utterance.rate = 0.55; }
+                else if (isHappy) { utterance.pitch = 1.0; utterance.rate = 1.00; }
+            }
+
+            utterance.volume = 1.0;
+
+            utterance.onend = () => {
+                speakSequentialStory(storyArray, currentLineIndex + 1);
+            };
+
+            utterance.onerror = () => {
+                speakSequentialStory(storyArray, currentLineIndex + 1);
+            };
+
+            window.speechSynthesis.speak(utterance);
         }
 
         if ('speechSynthesis' in window) {
@@ -418,6 +602,7 @@
             if (isVoiceEnabled) {
                 btn.innerText = "VOICE: ON";
                 btn.classList.remove('muted');
+                if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
             } else {
                 btn.innerText = "VOICE: OFF";
                 btn.classList.add('muted');
@@ -482,7 +667,8 @@
         }
 
         window.onload = () => {
-            renderAnimatedText("Noan's Favorite Stories // Enter", false);
+            const initialTitleArray = ["[T] Noan's Favorite Stories // Enter"];
+            renderAnimatedText(initialTitleArray, false);
             ghostLoop();
         };
     </script>
