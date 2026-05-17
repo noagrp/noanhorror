@@ -329,14 +329,14 @@
         const ghostStories = [
             [
                 "[T] The floorboards of Blackwood Manor groaned beneath Ben's weight, bleeding out ancient dust into the freezing twilight air. He gripped his failing flashlight tightly, tracing the strange symbols carved directly into the rotten wood frames.",
-                "[S] Creak... snap... creak...",
+                "[S] slow creak... slow snap... slow creak...",
                 "[A-NORMAL] This layout matches the blueprint exactly. The hidden ledger should be right behind the mantlepiece.",
                 "[T] The sound came from upstairs. A rhythmic dragging weight, scraping right above his skull. Ben stopped breathing, freezing in absolute paralysis as he turned his face slowly toward the ceiling.",
                 "[A-CURIOUS] Is anyone up there? I... I told you, I brought the keys... just let me leave with the documents...",
-                "[S] Tak... tak... tak...",
+                "[S] quick tak... quick tak... quick tak... stairs...",
                 "[T] Sharp footsteps echoed clearly now, coming down the spiral staircase. The shadows stretched impossibly long across the wallpaper. Suddenly, a wet, freezing hand locked firmly around Ben's ankle from under the steps.",
                 "[A-SCREAM] Help...! Someone answer me...! Get off me...! Please, let me go...!",
-                "[S] Shhhhiiiiiiwrrrrrrk...",
+                "[S] quick shhhhiiiiiiwrrrrrrk...",
                 "[T] Sharp claws tore into his calf muscle as he was dragged violently down into the pitch-black basement cavity.",
                 "[A-SCREAM] Ah...! My leg...! It's cutting right through the bone! Stop... please...",
                 "[T] The flashlight dropped, shattering completely on the floorboards. In the absolute dark, a lady's weeping laughter drifted close to his ear, signaling that the door behind him was locked forever."
@@ -344,13 +344,13 @@
             [
                 "[T] The safehouse barriers were buckling under the weight of the decaying horde outside. Red emergency alarms painted the concrete bunker in rhythmic, blinding pulses of crimson light.",
                 "[A-NORMAL] The structural integrity is holding at forty percent. We still have a window to broadcast the coordinates.",
-                "[S] Thud... thud... crash...",
+                "[S] slow thud... slow thud... crash...",
                 "[T] Outside, the distorted wails of a hundred monsters scraped against the blast shield. Ben noticed a dark liquid oozing through the upper ventilator grille.",
                 "[A-CURIOUS] Wait... what is that smell? That's not fuel oil... that's rot. How did they get up to the ventilation line?",
-                "[S] Bzzzzzzt... pop... bzzzz...",
+                "[S] slow bzzzzzzt... slow pop... bzzzz...",
                 "[T] The overhead lights flickered once, twice, and then completely died. The mechanical locks on the main vault doors clicked open with a heavy pneumatic sigh.",
                 "[A-SCARED] No.., no.., no..! The relay grid is fried! Lock it down manually! Get back from the threshold!",
-                "[S] Growl... crunch... tear...",
+                "[S] quick growl... quick crunch... quick tear...",
                 "[T] The reinforced iron mesh split apart. Shambling figures dropped from the ceiling, landing squarely on Ben's shoulders and clamping their teeth into his collarbone.",
                 "[A-SCREAM] They are breaking through! Grace, hit the self destruct switch! Help me...!",
                 "[A-SCREAM] No... no... they are ripping my shoulder apart... everything is burning...",
@@ -358,26 +358,26 @@
             ],
             [
                 "[T] Rain lashed violently against the glass window panes of the cabin where Ben stood trembling, holding a blood-slicked kitchen knife over the chest of the silent intruder.",
-                "[S] Drip... drop... drip...",
+                "[S] slow drip... slow drop... slow drip...",
                 "[A-NORMAL] It is completely over now. The perimeter is quiet. No one is coming down this road in a storm like this.",
                 "[T] He looked down at the pale face on the floor. The town police had spent weeks hunting for the serial killer stalking the local valley, warning everyone to lock their windows securely.",
                 "[A-CURIOUS] I had no choice... he broke through the back entrance... he was going to kill me, right? I survived...",
-                "[S] Tick... tock... tick...",
+                "[S] slow tick... slow tock... slow tick...",
                 "[T] Ben stepped back to catch his breath, caught by his own image reflection in the wall mirror. He looked at the intricately carved wooden frame, then down at the victim. The victim's hands were bound completely with thick ropes from behind before the stabbing began.",
                 "[A-SCARED] Wait... if he was the intruder... why did I find the ropes in my own drawer? Why did I lock him in?",
-                "[S] Hahahaha... hahahaha...",
+                "[S] quick hahahaha... quick hahahaha...",
                 "[T] He wiped the blood from his own cheek, realizing the truth as his mind fractured completely. There was no break-in. Ben stared down at his reflection's hollow, unblinking eyes, realizing he was the monster the town had been praying to catch."
             ],
             [
                 "[T] The morning sun pierced beautifully through the alpine canopy, casting golden beams over the clearing. Ben checked his radio, a massive grin breaking across his face as the signal meter jumped to full strength.",
                 "[A-HAPPY] Yes...! The connection went through! The search team just cleared the northern ridge! We are finally going home!",
-                "[S] Pop... bzzzz... click...",
+                "[S] slow pop... slow bzzzz... click...",
                 "[T] He turned around to share the joyful news with his survival partner, but his foot caught on a jagged copper snare hidden beneath the fallen leaves. The steel jaws snapped shut with terrifying velocity.",
-                "[S] Snap... crunch...",
+                "[S] quick snap... quick crunch...",
                 "[A-SCREAM] Ahhh...! My ankle! It's clamped clean through! The steel is biting into the nerve... I can't move!",
                 "[T] He dragged his bleeding limb toward the edge of the ravine, desperately searching for the supply pack containing the medical splints. He looked over the ridge, only to see their entire equipment crate smashed to splinters at the bottom of the rocky canyon.",
                 "[A-SCREAM] No... everything is gone. The medical kit, the supplies, the clean water... it's all destroyed. We survived two weeks out here just to bleed out on the final day...",
-                "[S] Thud... thud... thud...",
+                "[S] slow thud... slow thud... thud...",
                 "[T] Shadows detached themselves from the deeper thicket as the smell of fresh blood drifted into the wilderness. Ben looked up, his voice cracking into absolute desperation.",
                 "[A-SCREAM] I'm over here...! Please...! Follow the signal! Help me before they close the gap...!"
             ]
@@ -483,13 +483,25 @@
                 audioCtx.resume();
             }
 
-            const cleaned = sfxText.toLowerCase().replace(/[^a-z. ]/g, '');
+            const normalizedText = sfxText.toLowerCase();
+            
+            // DYNAMIC EMOTION OVERRIDE FOR TEMPO STEPPING
+            let beatDuration = 0.35; // Default baseline step interval
+            if (normalizedText.includes('quick') || normalizedText.includes('fast') || normalizedText.includes('stairs')) {
+                beatDuration = 0.12; // High-tempo panic pacing
+            } else if (normalizedText.includes('slow') || normalizedText.includes('lights off') || normalizedText.includes('dark')) {
+                beatDuration = 0.65; // Slow-tempo atmospheric pacing
+            }
+
+            const cleaned = normalizedText.replace(/[^a-z. ]/g, '');
             const beats = cleaned.split(/\s+|\.\.\.+/).filter(b => b.trim().length > 0);
             
             let startTime = audioCtx.currentTime + 0.05;
-            const beatDuration = 0.35; 
 
             beats.forEach((beat) => {
+                // Ignore structural processing flags to prevent dead note gaps
+                if (beat === 'quick' || beat === 'slow') return;
+
                 const osc = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
                 
