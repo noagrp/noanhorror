@@ -326,62 +326,71 @@
     </div>
 
     <script>
-        const ghostStories = [
+        // HOOK FOR FUTURE STORAGE: Group elements modularly in localized story sets
+        const storySet1 = [
             [
-                "[T] The floorboards of Blackwood Manor groaned beneath Ben's weight, bleeding out ancient dust into the freezing twilight air. He gripped his failing flashlight tightly, tracing the strange symbols carved directly into the rotten wood frames.",
-                "[S] slow creak... slow snap... slow creak...",
-                "[A-NORMAL] This layout matches the blueprint exactly. The hidden ledger should be right behind the mantlepiece.",
-                "[T] The sound came from upstairs. A rhythmic dragging weight, scraping right above his skull. Ben stopped breathing, freezing in absolute paralysis as he turned his face slowly toward the ceiling.",
-                "[A-CURIOUS] Is anyone up there? I... I told you, I brought the keys... just let me leave with the documents...",
-                "[S] quick tak... quick tak... quick tak... stairs...",
-                "[T] Sharp footsteps echoed clearly now, coming down the spiral staircase. The shadows stretched impossibly long across the wallpaper. Suddenly, a wet, freezing hand locked firmly around Ben's ankle from under the steps.",
-                "[A-SCREAM] Help...! Someone answer me...! Get off me...! Please, let me go...!",
-                "[S] quick shhhhiiiiiiwrrrrrrk...",
-                "[T] Sharp claws tore into his calf muscle as he was dragged violently down into the pitch-black basement cavity.",
-                "[A-SCREAM] Ah...! My leg...! It's cutting right through the bone! Stop... please...",
-                "[T] The flashlight dropped, shattering completely on the floorboards. In the absolute dark, a lady's weeping laughter drifted close to his ear, signaling that the door behind him was locked forever."
+                "[T-NORMAL] The floorboards of Blackwood Manor groaned beneath Ben's weight, bleeding out ancient dust into the freezing twilight air. He gripped his failing flashlight tightly, tracing the strange symbols carved directly into the rotten wood frames.",
+                "[S-SLOW] slow creak... slow snap... slow creak...",
+                "[T-NORMAL] This layout matches the blueprint exactly. The hidden ledger should be right behind the mantlepiece.",
+                "[T-SCARED] The sound came from upstairs. A rhythmic dragging weight, scraping right above his skull. Ben stopped breathing, freezing in absolute paralysis as he turned his face slowly toward the ceiling.",
+                "[T-SCARED] Is anyone up there? I... I told you, I brought the keys... just let me leave with the documents...",
+                "[S-FAST] quick tak... quick tak... quick tak... stairs...",
+                "[T-SCARED] Sharp footsteps echoed clearly now, coming down the spiral staircase. The shadows stretched impossibly long across the wallpaper. Suddenly, a wet, freezing hand locked firmly around Ben's ankle from under the steps.",
+                "[T-SCREAM] Help...! Someone answer me...! Get off me...! Please, let me go...!",
+                "[S-SHORT] quick shhhhiiiiiiwrrrrrrk...",
+                "[T-NORMAL] Sharp claws tore into his calf muscle as he was dragged violently down into the pitch-black basement cavity.",
+                "[T-SCREAM] Ah...! My leg...! It's cutting right through the bone! Stop... please...",
+                "[T-NORMAL] The flashlight dropped, shattering completely on the floorboards. In the absolute dark, a lady's weeping laughter drifted close to his ear, signaling that the door behind him was locked forever."
             ],
             [
-                "[T] The safehouse barriers were buckling under the weight of the decaying horde outside. Red emergency alarms painted the concrete bunker in rhythmic, blinding pulses of crimson light.",
-                "[A-NORMAL] The structural integrity is holding at forty percent. We still have a window to broadcast the coordinates.",
-                "[S] slow thud... slow thud... crash...",
-                "[T] Outside, the distorted wails of a hundred monsters scraped against the blast shield. Ben noticed a dark liquid oozing through the upper ventilator grille.",
-                "[A-CURIOUS] Wait... what is that smell? That's not fuel oil... that's rot. How did they get up to the ventilation line?",
-                "[S] slow bzzzzzzt... slow pop... bzzzz...",
-                "[T] The overhead lights flickered once, twice, and then completely died. The mechanical locks on the main vault doors clicked open with a heavy pneumatic sigh.",
-                "[A-SCARED] No.., no.., no..! The relay grid is fried! Lock it down manually! Get back from the threshold!",
-                "[S] quick growl... quick crunch... quick tear...",
-                "[T] The reinforced iron mesh split apart. Shambling figures dropped from the ceiling, landing squarely on Ben's shoulders and clamping their teeth into his collarbone.",
-                "[A-SCREAM] They are breaking through! Grace, hit the self destruct switch! Help me...!",
-                "[A-SCREAM] No... no... they are ripping my shoulder apart... everything is burning...",
-                "[T] The sound of tearing metal erupted in the dark, followed immediately by heavy, shambling footsteps pouring inside. Ben felt cold teeth scrape across his neck as the transmission went permanently silent."
+                "[T-NORMAL] The safehouse barriers were buckling under the weight of the decaying horde outside. Red emergency alarms painted the concrete bunker in rhythmic, blinding pulses of crimson light.",
+                "[T-NORMAL] The structural integrity is holding at forty percent. We still have a window to broadcast the coordinates.",
+                "[S-DEEP] slow thud... slow thud... crash...",
+                "[T-SCARED] Outside, the distorted wails of a hundred monsters scraped against the blast shield. Ben noticed a dark liquid oozing through the upper ventilator grille.",
+                "[T-SCARED] Wait... what is that smell? That's not fuel oil... that's rot. How did they get up to the ventilation line?",
+                "[S-SLOW] slow bzzzzzzt... slow pop... bzzzz...",
+                "[T-SCARED] The overhead lights flickered once, twice, and then completely died. The mechanical locks on the main vault doors clicked open with a heavy pneumatic sigh.",
+                "[T-SCARED] No.., no.., no..! The relay grid is fried! Lock it down manually! Get back from the threshold!",
+                "[S-ENERGETIC] quick growl... quick crunch... quick tear...",
+                "[T-SCREAM] They are breaking through! Grace, hit the self destruct switch! Help me...!",
+                "[T-SCREAM] No... no... they are ripping my shoulder apart... everything is burning...",
+                "[T-NORMAL] The sound of tearing metal erupted in the dark, followed immediately by heavy, shambling footsteps pouring inside. Ben felt cold teeth scrape across his neck as the transmission went permanently silent."
             ],
             [
-                "[T] Rain lashed violently against the glass window panes of the cabin where Ben stood trembling, holding a blood-slicked kitchen knife over the chest of the silent intruder.",
-                "[S] slow drip... slow drop... slow drip...",
-                "[A-NORMAL] It is completely over now. The perimeter is quiet. No one is coming down this road in a storm like this.",
-                "[T] He looked down at the pale face on the floor. The town police had spent weeks hunting for the serial killer stalking the local valley, warning everyone to lock their windows securely.",
-                "[A-CURIOUS] I had no choice... he broke through the back entrance... he was going to kill me, right? I survived...",
-                "[S] slow tick... slow tock... slow tick...",
-                "[T] Ben stepped back to catch his breath, caught by his own image reflection in the wall mirror. He looked at the intricately carved wooden frame, then down at the victim. The victim's hands were bound completely with thick ropes from behind before the stabbing began.",
-                "[A-SCARED] Wait... if he was the intruder... why did I find the ropes in my own drawer? Why did I lock him in?",
-                "[S] quick hahahaha... quick hahahaha...",
-                "[T] He wiped the blood from his own cheek, realizing the truth as his mind fractured completely. There was no break-in. Ben stared down at his reflection's hollow, unblinking eyes, realizing he was the monster the town had been praying to catch."
+                "[T-SCARED] Rain lashed violently against the glass window panes of the cabin where Ben stood trembling, holding a blood-slicked kitchen knife over the chest of the silent intruder.",
+                "[S-SLOW] slow drip... slow drop... slow drip...",
+                "[T-NORMAL] It is completely over now. The perimeter is quiet. No one is coming down this road in a storm like this.",
+                "[T-NORMAL] He looked down at the pale face on the floor. The town police had spent weeks hunting for the serial killer stalking the local valley, warning everyone to lock their windows securely.",
+                "[T-SCARED] I had no choice... he broke through the back entrance... he was going to kill me, right? I survived...",
+                "[S-SLOW] slow tick... slow tock... slow tick...",
+                "[T-SCARED] Ben stepped back to catch his breath, caught by his own image reflection in the wall mirror. He looked at the intricately carved wooden frame, then down at the victim. The victim's hands were bound completely with thick ropes from behind before the stabbing began.",
+                "[T-SCARED] Wait... if he was the intruder... why did I find the ropes in my own drawer? Why did I lock him in?",
+                "[S-FAST] quick hahahaha... quick hahahaha...",
+                "[T-NORMAL] He wiped the blood from his own cheek, realizing the truth as his mind fractured completely. There was no break-in. Ben stared down at his reflection's hollow, unblinking eyes, realizing he was the monster the town had been praying to catch."
             ],
             [
-                "[T] The morning sun pierced beautifully through the alpine canopy, casting golden beams over the clearing. Ben checked his radio, a massive grin breaking across his face as the signal meter jumped to full strength.",
-                "[A-HAPPY] Yes...! The connection went through! The search team just cleared the northern ridge! We are finally going home!",
-                "[S] slow pop... slow bzzzz... click...",
-                "[T] He turned around to share the joyful news with his survival partner, but his foot caught on a jagged copper snare hidden beneath the fallen leaves. The steel jaws snapped shut with terrifying velocity.",
-                "[S] quick snap... quick crunch...",
-                "[A-SCREAM] Ahhh...! My ankle! It's clamped clean through! The steel is biting into the nerve... I can't move!",
-                "[T] He dragged his bleeding limb toward the edge of the ravine, desperately searching for the supply pack containing the medical splints. He looked over the ridge, only to see their entire equipment crate smashed to splinters at the bottom of the rocky canyon.",
-                "[A-SCREAM] No... everything is gone. The medical kit, the supplies, the clean water... it's all destroyed. We survived two weeks out here just to bleed out on the final day...",
-                "[S] slow thud... slow thud... thud...",
-                "[T] Shadows detached themselves from the deeper thicket as the smell of fresh blood drifted into the wilderness. Ben looked up, his voice cracking into absolute desperation.",
-                "[A-SCREAM] I'm over here...! Please...! Follow the signal! Help me before they close the gap...!"
+                "[T-HAPPY] The morning sun pierced beautifully through the alpine canopy, casting golden beams over the clearing. Ben checked his radio, a massive grin breaking across his face as the signal meter jumped to full strength.",
+                "[T-HAPPY] Yes...! The connection went through! The search team just cleared the northern ridge! We are finally going home!",
+                "[S-SHORT] slow pop... slow bzzzz... click...",
+                "[T-NORMAL] He turned around to share the joyful news with his survival partner, but his foot caught on a jagged copper snare hidden beneath the fallen leaves. The steel jaws snapped shut with terrifying velocity.",
+                "[S-FAST] quick snap... quick crunch...",
+                "[T-SCREAM] Ahhh...! My ankle! It's clamped clean through! The steel is biting into the nerve... I can't move!",
+                "[T-NORMAL] He dragged his bleeding limb toward the edge of the ravine, desperately searching for the supply pack containing the medical splints. He looked over the ridge, only to see their entire equipment crate smashed to splinters at the bottom of the rocky canyon.",
+                "[T-SCREAM] No... everything is gone. The medical kit, the supplies, the clean water... it's all destroyed. We survived two weeks out here just to bleed out on the final day...",
+                "[S-DEEP] slow thud... slow thud... thud...",
+                "[T-SCARED] Shadows detached themselves from the deeper thicket as the smell of fresh blood drifted into the wilderness. Ben looked up, his voice cracking into absolute desperation.",
+                "[T-SCREAM] I'm over here...! Please...! Follow the signal! Help me before they close the gap...!"
+            ],
+            // Example of a completely silent atmospheric story (No tags required)
+            [
+                "The old lighthouse had been abandoned since 1922.",
+                "Every traveler who walks along the jagged cliffs reports seeing a flickering glow from the top tower.",
+                "But there are no stairs left inside. Only a sheer drop into the roaring ocean waves down below."
             ]
         ];
+
+        // Combine future arrays here dynamically
+        const ghostStories = [...storySet1];
 
         let unreadStories = [];
         let isVoiceEnabled = true;
@@ -400,6 +409,7 @@
             }
 
             targetStoryArray.forEach((rawLine, pIndex) => {
+                // Strip out operational audio structural tags gracefully
                 const displayLine = rawLine.replace(/^\[[A-Z\-]+\]\s*/, '');
                 
                 const pElement = document.createElement('p');
@@ -473,7 +483,7 @@
             }
         }
 
-        function playMidiSoundEffect(sfxText, callback) {
+        function playMidiSoundEffect(sfxTag, sfxText, callback) {
             if (!isVoiceEnabled || !audioCtx) {
                 if (callback) callback();
                 return;
@@ -483,14 +493,25 @@
                 audioCtx.resume();
             }
 
+            const tag = sfxTag.toLowerCase();
             const normalizedText = sfxText.toLowerCase();
             
-            // DYNAMIC EMOTION OVERRIDE FOR TEMPO STEPPING
-            let beatDuration = 0.35; // Default baseline step interval
-            if (normalizedText.includes('quick') || normalizedText.includes('fast') || normalizedText.includes('stairs')) {
-                beatDuration = 0.12; // High-tempo panic pacing
-            } else if (normalizedText.includes('slow') || normalizedText.includes('lights off') || normalizedText.includes('dark')) {
-                beatDuration = 0.65; // Slow-tempo atmospheric pacing
+            // DYNAMIC SFX EMOTION OVERRIDES FOR SYNTH TEMPO
+            let beatDuration = 0.35; // default baseline interval
+            let frequencyModifier = 0;
+
+            if (tag.includes('fast') || tag.includes('energetic')) {
+                beatDuration = 0.13; // Packed high-speed tempo
+            } else if (tag.includes('slow') || tag.includes('long')) {
+                beatDuration = 0.65; // Extended tracking tempo
+            } else if (tag.includes('short')) {
+                beatDuration = 0.20; // Short burst tracking tempo
+            }
+
+            if (tag.includes('deep')) {
+                frequencyModifier = -35; // Drop pitches significantly for bass tones
+            } else if (tag.includes('energetic')) {
+                frequencyModifier = 40; // Shift pitches up for active profiles
             }
 
             const cleaned = normalizedText.replace(/[^a-z. ]/g, '');
@@ -499,7 +520,6 @@
             let startTime = audioCtx.currentTime + 0.05;
 
             beats.forEach((beat) => {
-                // Ignore structural processing flags to prevent dead note gaps
                 if (beat === 'quick' || beat === 'slow') return;
 
                 const osc = audioCtx.createOscillator();
@@ -508,37 +528,37 @@
                 osc.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
 
-                let frequency = 90; 
+                let frequency = 90 + frequencyModifier; 
                 let type = 'square'; 
                 let duration = 0.15;
 
                 if (beat.includes('tak') || beat.includes('tick') || beat.includes('tock') || beat.includes('snap')) {
-                    frequency = beat.includes('tick') ? 180 : 110;
+                    frequency = beat.includes('tick') ? (180 + frequencyModifier) : (110 + frequencyModifier);
                     type = 'square';
                     duration = 0.04; 
                 } else if (beat.includes('creak') || beat.includes('shhh') || beat.includes('shwrrk')) {
-                    frequency = 75;
+                    frequency = 75 + frequencyModifier;
                     type = 'sawtooth';
                     duration = 0.3; 
                 } else if (beat.includes('thud') || beat.includes('crash') || beat.includes('growl') || beat.includes('crunch') || beat.includes('tear')) {
-                    frequency = 55; 
+                    frequency = 55 + frequencyModifier; 
                     type = 'sawtooth';
                     duration = 0.25;
                 } else if (beat.includes('bzzz') || beat.includes('pop')) {
-                    frequency = 130;
+                    frequency = 130 + frequencyModifier;
                     type = 'triangle';
                     duration = 0.2;
                 } else if (beat.includes('hahaha')) {
-                    frequency = 65;
+                    frequency = 65 + frequencyModifier;
                     type = 'sawtooth';
                     duration = 0.12;
                 }
 
                 osc.type = type;
-                osc.frequency.setValueAtTime(frequency, startTime);
+                osc.frequency.setValueAtTime(Math.max(20, frequency), startTime);
                 
                 if (type === 'sawtooth') {
-                    osc.frequency.exponentialRampToValueAtTime(frequency - 20, startTime + duration);
+                    osc.frequency.exponentialRampToValueAtTime(Math.max(20, frequency - 20), startTime + duration);
                 }
 
                 gainNode.gain.setValueAtTime(0.12, startTime);
@@ -561,76 +581,49 @@
 
             const rawLine = storyArray[currentLineIndex];
             
-            const isTeller = rawLine.startsWith("[T]");
-            const isNormal = rawLine.startsWith("[A-NORMAL]");
-            const isScared = rawLine.startsWith("[A-SCARED]");
-            const isCurios = rawLine.startsWith("[A-CURIOUS]");
-            const isScream = rawLine.startsWith("[A-SCREAM]");
-            const isPain = rawLine.startsWith("[A-PAIN]");
-            const isSad = rawLine.startsWith("[A-SAD]");
-            const isHappy = rawLine.startsWith("[A-HAPPY]");
-            const isSFX = rawLine.startsWith("[S]");
+            // Check for explicit structural tags
+            const hasTag = rawLine.startsWith("[") && rawLine.includes("]");
             
-            const cleanText = rawLine.replace(/^\[[A-Z\-]+\]\s*/, '');
+            // If the story line is totally clean, handle as neutral text with standard continuation
+            if (!hasTag) {
+                const utterance = new SpeechSynthesisUtterance(rawLine);
+                utterance.pitch = 0.85;
+                utterance.rate = 0.80;
+                utterance.onend = () => speakSequentialStory(storyArray, currentLineIndex + 1);
+                utterance.onerror = () => speakSequentialStory(storyArray, currentLineIndex + 1);
+                window.speechSynthesis.speak(utterance);
+                return;
+            }
 
-            if (isSFX) {
-                playMidiSoundEffect(cleanText, () => {
+            const tagEndIndex = rawLine.indexOf("]");
+            const completeTag = rawLine.substring(1, tagEndIndex);
+            const cleanText = rawLine.substring(tagEndIndex + 1).trim();
+
+            // Intercept synthesizer sounds directly
+            if (completeTag.startsWith("S-")) {
+                playMidiSoundEffect(completeTag, cleanText, () => {
                     speakSequentialStory(storyArray, currentLineIndex + 1);
                 });
                 return;
             }
 
+            // Route Storyteller audio options
             const utterance = new SpeechSynthesisUtterance(cleanText);
-            const voices = window.speechSynthesis.getVoices();
-
-            if (voices.length > 0) {
-                if (isTeller) {
-                    const femaleVoice = voices.find(v => {
-                        const name = v.name.toLowerCase();
-                        return name.includes('female') || name.includes('zira') || name.includes('google uk english female') || name.includes('hazel') || name.includes('siri') && v.lang.includes('en');
-                    });
-                    if (femaleVoice) utterance.voice = femaleVoice;
-                    utterance.pitch = 0.95;
-                    utterance.rate = 0.75;
-                } else {
-                    const maleVoice = voices.find(v => {
-                        const name = v.name.toLowerCase();
-                        return name.includes('male') || name.includes('david') || name.includes('google uk english male') || name.includes('daniel') || name.includes('ravi') || name.includes('aaron');
-                    });
-                    if (maleVoice) utterance.voice = maleVoice;
-                    
-                    if (isNormal) {
-                        utterance.pitch = 0.65;
-                        utterance.rate = 0.82;
-                    } else if (isCurios) {
-                        utterance.pitch = 0.78; 
-                        utterance.rate = 0.68;  
-                    } else if (isScared) {
-                        utterance.pitch = 1.15; 
-                        utterance.rate = 1.12;  
-                    } else if (isScream) {
-                        utterance.pitch = 1.45; 
-                        utterance.rate = 1.25;  
-                    } else if (isPain) {
-                        utterance.pitch = 0.45; 
-                        utterance.rate = 0.55;  
-                    } else if (isSad) {
-                        utterance.pitch = 0.35; 
-                        utterance.rate = 0.50;  
-                    } else if (isHappy) {
-                        utterance.pitch = 0.90; 
-                        utterance.rate = 0.95;  
-                    }
-                }
-            } else {
-                if (isTeller) { utterance.pitch = 1.1; utterance.rate = 0.8; }
-                else if (isNormal) { utterance.pitch = 0.7; utterance.rate = 0.85; }
-                else if (isCurios) { utterance.pitch = 0.85; utterance.rate = 0.70; }
-                else if (isScared) { utterance.pitch = 1.3; utterance.rate = 1.10; }
-                else if (isScream) { utterance.pitch = 1.6; utterance.rate = 1.30; }
-                else if (isPain) { utterance.pitch = 0.4; utterance.rate = 0.60; }
-                else if (isSad) { utterance.pitch = 0.3; utterance.rate = 0.55; }
-                else if (isHappy) { utterance.pitch = 1.0; utterance.rate = 1.00; }
+            
+            // Apply single narrator dynamic voice modulation rules across mobile boundaries
+            if (completeTag.includes("HAPPY")) {
+                utterance.pitch = 1.05; 
+                utterance.rate = 0.95;  
+            } else if (completeTag.includes("SCREAM")) {
+                utterance.pitch = 1.35; 
+                utterance.rate = 1.20;  
+            } else if (completeTag.includes("SCARED") || completeTag.includes("SAD")) {
+                utterance.pitch = 0.60; // Same lower/flattened emotional profile
+                utterance.rate = 0.70;  
+            } else { 
+                // Default fallback / NORMAL state profile
+                utterance.pitch = 0.85;
+                utterance.rate = 0.80;
             }
 
             utterance.volume = 1.0;
