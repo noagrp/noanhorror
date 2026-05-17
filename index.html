@@ -38,32 +38,41 @@
             right: 20px !important;
             bottom: auto !important;
             left: auto !important;
-            z-index: 30; /* Increased z-index to stay unconditionally above all UI elements */
+            z-index: 40; /* Placed above all layers to ensure unconditional touch priority */
             display: flex;
             gap: 15px;
         }
 
+        /* High Visibility Redesigned Control Button Framework */
         .control-btn {
-            background: transparent !important;
-            border: none !important;
+            background: rgba(239, 68, 68, 0.15) !important; /* Semi-transparent crimson backing glow */
+            border: 1px solid #ef4444 !important; /* Crisp glowing red safety border line */
             outline: none !important;
-            box-shadow: none !important;
-            color: #444444 !important;
+            box-shadow: 0 0 12px rgba(239, 68, 68, 0.3) !important; /* Atmospheric red drop glow */
+            color: #ef4444 !important; /* Punchy high-visibility crimson red text */
             cursor: pointer;
             font-family: monospace;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            padding: 0;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease-in-out;
+            padding: 6px 14px; /* Enhanced interactive touch zone boundary */
             margin: 0;
+            border-radius: 4px;
             -webkit-appearance: none;
             appearance: none;
         }
         .control-btn:hover {
-            color: #7f1d1d !important;
+            background: rgba(239, 68, 68, 0.3) !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.5) !important;
         }
+        /* Muted High Contrast Visual Alert State (Prevents Button from going dim/invisible) */
         .control-btn.muted {
-            color: #1a1a1a !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid #7f1d1d !important; /* Deep dark blood-red border line indicator */
+            color: #ffffff !important; /* Swaps to crisp absolute solid white text for extreme night readability */
+            box-shadow: 0 0 8px rgba(127, 29, 29, 0.4) !important;
         }
 
         /* Responsive Glassmorphism Story Box Container (No Border) */
@@ -220,24 +229,24 @@
             opacity: 0 !important;
         }
 
-        /* Atmospheric Disclaimer Header Style Configuration - Moved Safely to Top */
+        /* Centered Directly Above the Story Card Flow (Option 1) */
         .site-footer {
-            position: absolute;
-            top: 20px; /* Aligned horizontally clear of the main layout vectors */
-            left: 20px;
-            max-width: calc(100% - 160px); /* Strictly safeguards button clearance zones */
-            text-align: left;
+            max-width: 550px;
+            width: 85%;
+            text-align: center;
             z-index: 10;
             font-family: monospace;
             font-size: 0.65rem;
-            color: #2a2a2a;
+            color: transparent; /* Set to hidden initially during initial fullscreen title layout state */
             letter-spacing: 1px;
             line-height: 1.5;
             box-sizing: border-box;
-            transition: color 0.5s ease;
+            margin-bottom: 15px; /* Creates explicit breathing clearance buffer above the container card */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            transition: color 0.5s ease-in-out;
         }
         .site-footer.active-state {
-            color: #444444; /* Lights up slightly once the user explicitly enters the core view state */
+            color: rgba(255, 255, 255, 0.55) !important; /* Transitions cleanly to a soft white on explicit application state entry */
         }
 
         /* Mobile and Landscape Short Screen Optimizations */
@@ -246,18 +255,21 @@
                 top: 12px !important;
                 right: 12px !important;
             }
+            .control-btn {
+                font-size: 0.68rem;
+                padding: 4px 10px;
+            }
             .site-footer {
-                top: 12px;
-                left: 12px;
-                max-width: calc(100% - 110px); /* Keeps text from backing into mobile audio rows */
+                max-width: 90%;
+                width: 90%;
                 font-size: 0.55rem;
                 line-height: 1.3;
+                margin-bottom: 10px;
             }
             .card-container {
                 padding: 25px 20px;
                 width: 90%;
-                max-height: 70vh;
-                margin-top: 60px; /* Clear safety margin down from top header elements */
+                max-height: 68vh;
                 margin-bottom: 20px; 
             }
             .card-container.is-menu-state {
@@ -270,7 +282,7 @@
             #story-text {
                 font-size: 1.1rem;
                 min-height: 120px;
-                max-height: 40vh;
+                max-height: 38vh;
             }
             #story-text.menu-centered {
                 font-size: 2.2rem !important; /* Mobile Title Font Size */
@@ -290,7 +302,7 @@
         <button id="voice-btn" class="control-btn" onclick="toggleVoiceEngine()">VOICE: ON</button>
     </div>
 
-    <!-- Atmospheric Disclaimer Header Row Node -->
+    <!-- Atmospheric Disclaimer Header Row Node - Relocated right above the card container stack -->
     <header id="app-footer" class="site-footer">
         DISCLAIMER: ALL STORIES ARE FICTIONAL. FOR THE BEST EXPERIENCE, READ ON A PC.
     </header>
@@ -434,7 +446,7 @@
             
             mainBox.classList.remove('is-menu-state');
             
-            // Activate disclaimer header text layout brightness index
+            // Activate disclaimer text view state transition to visible white
             document.getElementById('app-footer').classList.add('active-state');
             
             document.getElementById('action-trigger').style.display = "inline-block";
@@ -631,7 +643,7 @@
             window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
         }
 
-        UX: function toggleVoiceEngine() {
+        function toggleVoiceEngine() {
             const btn = document.getElementById('voice-btn');
             isVoiceEnabled = !isVoiceEnabled;
             if (isVoiceEnabled) {
