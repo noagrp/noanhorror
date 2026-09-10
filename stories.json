@@ -140,6 +140,28 @@
         "[T-NORMAL] When I looked at the digital preview, there weren't five faces in the frame anymore.",
         "[T-NORMAL] Something pale was wearing my friend's jacket, and the real version of him was hanging upside down from the branches above."
       ]
+    },
+    {
+      "id": 11,
+      "lines": [
+        "[T-NORMAL] The elevator was empty when I stepped inside at two in the morning.",
+        "[S-SHORT] slow ding... click...",
+        "[T-NORMAL] As the doors closed, the small display above the buttons changed from OCCUPANCY: 1 to OCCUPANCY: 2.",
+        "[T-NORMAL] I laughed nervously and pressed the lobby button again.",
+        "[S-DEEP] slow hum... slow stop...",
+        "[T-NORMAL] The elevator stopped between floors. The lights went out. In the dark, the display changed to OCCUPANCY: 3."
+      ]
+    },
+    {
+      "id": 12,
+      "lines": [
+        "[T-NORMAL] I woke at 3:14 a.m. to a voice note sent from my own phone while I was asleep.",
+        "[S-SLOW] slow bzzzzzzt... click...",
+        "[T-NORMAL] I pressed play and heard my own sleeping breath, followed by my voice whispering very softly, Don't turn around.",
+        "[T-NORMAL] I froze. The recording continued for another three seconds of silence.",
+        "[S-SHORT] slow whisper...",
+        "[T-NORMAL] Then a second voice, much closer to the microphone, whispered, Too late."
+      ]
     }
   ]
 }
