@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noan's Favorite Stories</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=1">
+    <link rel="manifest" href="manifest.webmanifest?v=1">
+    <meta name="theme-color" content="#020204">
+    <link rel="stylesheet" href="design.css?v=1">
     <style>
         /* Base Pure Dark Atmosphere */
         body {
@@ -313,7 +318,7 @@
 
     <!-- Atmospheric Disclaimer Header Row Node - Relocated right above the card container stack -->
     <header id="app-footer" class="site-footer">
-        Disclaimer: All stories are fictional. For the best experience, read on a computer. You may need to Install Voice Data (download a high-quality or "Enhanced" voice pack) on a phone.
+        All stories are fictional.
     </header>
 
     <!-- Main Glassmorphism Framework Interface Box (Starts in Fullscreen Centered Menu State) -->
@@ -683,6 +688,10 @@
             
             ghostLoop();
         };
+    </script>
+
+    <script>
+      if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js?v=1').catch(()=>{}); }
     </script>
 </body>
 </html>
