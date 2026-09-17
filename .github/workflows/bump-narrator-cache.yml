@@ -1,0 +1,33 @@
+name: Bump narrator cache
+
+on:
+  push:
+    paths:
+      - '.github/workflows/bump-narrator-cache.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump narrator and service worker versions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('narrator.js?v=1','narrator.js?v=2')
+          s=s.replace('service-worker.js?v=1','service-worker.js?v=2')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Refresh narrator cache version"
+          git push
