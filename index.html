@@ -18,12 +18,11 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            /* TWEAK LINE: Utilizes modern Dynamic Viewport Height to lock bounds flawlessly on mobile without ghost scrolling */
-            min-height: 100dvh; 
-            max-width: 100vw; /* Locks horizontal boundaries strictly to the device hardware */
-            contain: paint;   /* Prevents floating entities from pulling or expanding the layout */
+            min-height: 100dvh;
+            max-width: 100vw;
+            contain: paint;
             display: flex;
-            flex-direction: column; /* Clean vertical stacked grouping */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
@@ -31,667 +30,152 @@
             user-select: none;
             -webkit-user-select: none;
         }
-
-        html {
-            height: 100vh;
-            height: 100dvh;
-        }
-
-        /* Fixed Audio Panel - Locked to Top Right Permanently */
-        .audio-controls {
-            position: fixed;
-            top: 20px !important;
-            right: 20px !important;
-            bottom: auto !important;
-            left: auto !important;
-            z-index: 40; /* Placed above all layers to ensure unconditional touch priority */
-            display: flex;
-            gap: 15px;
-        }
-
-        /* High Visibility Redesigned Control Button Framework */
-        .control-btn {
-            background: rgba(239, 68, 68, 0.15) !important; /* Semi-transparent crimson backing glow */
-            border: 1px solid #ef4444 !important; /* Crisp glowing red safety border line */
-            outline: none !important;
-            box-shadow: 0 0 12px rgba(239, 68, 68, 0.3) !important; /* Atmospheric red drop glow */
-            color: #ef4444 !important; /* Punchy high-visibility crimson red text */
-            cursor: pointer;
-            font-family: monospace;
-            font-size: 0.75rem;
-            font-weight: bold;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease-in-out;
-            padding: 6px 14px; /* Enhanced interactive touch zone boundary */
-            margin: 0;
-            border-radius: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        .control-btn:hover {
-            background: rgba(239, 68, 68, 0.3) !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 16px rgba(239, 68, 68, 0.5) !important;
-        }
-        /* Muted High Contrast Visual Alert State (Prevents Button from going dim/invisible) */
-        .control-btn.muted {
-            background: rgba(255, 255, 255, 0.05) !important;
-            border: 1px solid #7f1d1d !important; /* Deep dark blood-red border line indicator */
-            color: #ffffff !important; /* Swaps to crisp absolute solid white text for extreme night readability */
-            box-shadow: 0 0 8px rgba(127, 29, 29, 0.4) !important;
-        }
-
-        /* Responsive Glassmorphism Story Box Container (No Border) */
-        .card-container {
-            position: relative;
-            z-index: 5; 
-            max-width: 550px;
-            width: 85%;
-            text-align: center;
-            box-sizing: border-box;
-            padding: 40px 30px;
-            border-radius: 16px;
-            transition: all 0.5s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            
-            /* Safe Height boundaries preventing viewport breakage on short devices */
-            max-height: 80vh;
-            max-height: 80dvh;
-            
-            /* Glassmorphism Effect Rules */
-            background: rgba(255, 255, 255, 0.02) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            
-            border: none !important;
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.8) !important;
-        }
-
-        /* Menu State: Forces perfect vertical/horizontal fullscreen centering for the Enter word */
-        .card-container.is-menu-state {
-            max-width: 100% !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            height: 100dvh !important;
-            max-height: 100vh !important;
-            max-height: 100dvh !important;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: transparent !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-            box-shadow: none !important;
-            padding: 0;
-        }
-
-        /* Full Word Shaking Structure Base */
-        .word-shiver {
-            display: inline-block;
-            white-space: pre; 
-            animation: wordTremble 0.22s infinite alternate ease-in-out;
-        }
-
-        @keyframes wordTremble {
-            0% { transform: translate(0.4px, 0.2px) rotate(0deg); }
-            50% { transform: translate(-0.2px, -0.3px) rotate(-0.1deg); }
-            100% { transform: translate(0.3px, -0.2px) rotate(0.1deg); }
-        }
-
-        #story-text {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            min-height: 140px;
-            
-            /* Dynamic height balancing for ultra short or cramped phone displays */
-            max-height: 50vh; 
-            max-height: 50dvh;
-            overflow-y: auto; 
-            scrollbar-width: none; /* Hides scrollbar for Firefox */
-            width: 100%;
-            display: block; 
-            text-align: justify;
-            text-justify: inter-word;
-            color: #e5e7eb !important;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            margin: 0;
-            padding: 0;
-            transition: font-size 0.3s ease;
-        }
-
-        /* Hide scrollbars completely for Chrome, Safari, Opera */
-        #story-text::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Center alignments explicitly on the initial Menu view screen layout */
-        #story-text.menu-centered {
-            text-align: center !important;
-            font-size: 2.5rem !important; /* Desktop Title Font Size */
-            letter-spacing: 4px;
-            color: #ffffff !important;
-            max-height: none !important;
-            overflow-y: visible !important;
-        }
-
-        /* Glassmorphic Action Button Configuration (No Border) */
-        .next-btn {
-            display: inline-block;
-            margin-top: 35px;
-            font-family: 'Georgia', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-            padding: 12px 28px;
-            border-radius: 8px;
-            color: #ffffff !important;
-            flex-shrink: 0; /* Prevents button from collapsing on tiny screens */
-            
-            background: rgba(153, 27, 27, 0.15) !important;
-            backdrop-filter: blur(4px) !important;
-            -webkit-backdrop-filter: blur(4px) !important;
-            border: none !important; 
-            outline: none !important;
-            box-shadow: none !important;
-            
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-        .next-btn:hover {
-            background: rgba(239, 68, 68, 0.3) !important;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2) !important;
-        }
-
-        /* Highly Recognizable Floating Background Ghosts */
-        .bg-ghost {
-            position: absolute;
-            z-index: 1;
-            cursor: pointer;
-            filter: blur(2px);
-            animation: floatAndFade 10s ease-in-out forwards;
-        }
-
-        /* Ghost Inner container element allows scale flipping over animation space paths */
-        .bg-ghost-body {
-            display: inline-block;
-            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
-            transform: var(--base-flip);
-        }
-
-        @keyframes floatAndFade {
-            0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
-            25% { opacity: var(--target-opacity); }
-            75% { opacity: var(--target-opacity); }
-            100% { opacity: 0; transform: translate(var(--x-drift), var(--y-drift)) scale(1.1); }
-        }
-
-        .bg-ghost.fly-away .bg-ghost-body {
-            transform: translateY(-350px) scale(0.1) rotate(60deg) !important;
-            opacity: 0 !important;
-        }
-
-        /* Centered Directly Above the Story Card Flow (Option 1) */
-        .site-footer {
-            max-width: 550px;
-            width: 85%;
-            text-align: center;
-            z-index: 10;
-            font-family: monospace;
-            font-size: 0.65rem;
-            color: transparent; /* Set to hidden initially during initial fullscreen title layout state */
-            letter-spacing: 1px;
-            line-height: 1.5;
-            box-sizing: border-box;
-            margin-bottom: 15px; /* Creates explicit breathing clearance buffer above the container card */
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-            transition: color 0.5s ease-in-out;
-        }
-        .site-footer.active-state {
-            color: rgba(255, 255, 255, 0.55) !important; /* Transitions cleanly to a soft white on explicit application state entry */
-        }
-
-        /* Mobile and Landscape Short Screen Optimizations */
+        html { height: 100vh; height: 100dvh; }
+        .audio-controls { position: fixed; top: 20px !important; right: 20px !important; bottom: auto !important; left: auto !important; z-index: 40; display: flex; gap: 15px; }
+        .control-btn { background: rgba(239, 68, 68, 0.15) !important; border: 1px solid #ef4444 !important; outline: none !important; box-shadow: 0 0 12px rgba(239, 68, 68, 0.3) !important; color: #ef4444 !important; cursor: pointer; font-family: monospace; font-size: 0.75rem; font-weight: bold; letter-spacing: 1.5px; transition: all 0.3s ease-in-out; padding: 6px 14px; margin: 0; border-radius: 4px; -webkit-appearance: none; appearance: none; }
+        .control-btn:hover { background: rgba(239, 68, 68, 0.3) !important; color: #ffffff !important; box-shadow: 0 0 16px rgba(239, 68, 68, 0.5) !important; }
+        .control-btn.muted { background: rgba(255, 255, 255, 0.05) !important; border: 1px solid #7f1d1d !important; color: #ffffff !important; box-shadow: 0 0 8px rgba(127, 29, 29, 0.4) !important; }
+        .card-container { position: relative; z-index: 5; max-width: 550px; width: 85%; text-align: center; box-sizing: border-box; padding: 40px 30px; border-radius: 16px; transition: all 0.5s ease-in-out; display: flex; flex-direction: column; justify-content: center; align-items: center; max-height: 80vh; max-height: 80dvh; background: rgba(255, 255, 255, 0.02) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border: none !important; box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.8) !important; }
+        .card-container.is-menu-state { max-width: 100% !important; width: 100vw !important; height: 100vh !important; height: 100dvh !important; max-height: 100vh !important; max-height: 100dvh !important; display: flex; flex-direction: column; justify-content: center; align-items: center; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; padding: 0; }
+        .word-shiver { display: inline-block; white-space: pre; animation: wordTremble 0.22s infinite alternate ease-in-out; }
+        @keyframes wordTremble { 0% { transform: translate(0.4px, 0.2px) rotate(0deg); } 50% { transform: translate(-0.2px, -0.3px) rotate(-0.1deg); } 100% { transform: translate(0.3px, -0.2px) rotate(0.1deg); } }
+        #story-text { font-size: 1.25rem; line-height: 1.8; min-height: 140px; max-height: 50vh; max-height: 50dvh; overflow-y: auto; scrollbar-width: none; width: 100%; display: block; text-align: justify; text-justify: inter-word; color: #e5e7eb !important; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); background: transparent !important; border: none !important; box-shadow: none !important; margin: 0; padding: 0; transition: font-size 0.3s ease; }
+        #story-text::-webkit-scrollbar { display: none; }
+        #story-text.menu-centered { text-align: center !important; font-size: 2.5rem !important; letter-spacing: 4px; color: #ffffff !important; max-height: none !important; overflow-y: visible !important; }
+        .next-btn { display: inline-block; margin-top: 35px; font-family: 'Georgia', serif; font-size: 1rem; cursor: pointer; letter-spacing: 2px; transition: all 0.3s ease; padding: 12px 28px; border-radius: 8px; color: #ffffff !important; flex-shrink: 0; background: rgba(153, 27, 27, 0.15) !important; backdrop-filter: blur(4px) !important; -webkit-backdrop-filter: blur(4px) !important; border: none !important; outline: none !important; box-shadow: none !important; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+        .next-btn:hover { background: rgba(239, 68, 68, 0.3) !important; box-shadow: 0 0 20px rgba(239, 68, 68, 0.2) !important; }
+        .bg-ghost { position: absolute; z-index: 1; cursor: pointer; filter: blur(2px); animation: floatAndFade 10s ease-in-out forwards; }
+        .bg-ghost-body { display: inline-block; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease; transform: var(--base-flip); }
+        @keyframes floatAndFade { 0% { opacity: 0; transform: translate(0, 0) scale(0.7); } 25% { opacity: var(--target-opacity); } 75% { opacity: var(--target-opacity); } 100% { opacity: 0; transform: translate(var(--x-drift), var(--y-drift)) scale(1.1); } }
+        .bg-ghost.fly-away .bg-ghost-body { transform: translateY(-350px) scale(0.1) rotate(60deg) !important; opacity: 0 !important; }
+        .site-footer { max-width: 550px; width: 85%; text-align: center; z-index: 10; font-family: monospace; font-size: 0.65rem; color: transparent; letter-spacing: 1px; line-height: 1.5; box-sizing: border-box; margin-bottom: 15px; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); transition: color 0.5s ease-in-out; }
+        .site-footer.active-state { color: rgba(255, 255, 255, 0.55) !important; }
         @media (max-width: 580px), (max-height: 600px) {
-            .audio-controls {
-                top: 12px !important;
-                right: 12px !important;
-            }
-            .control-btn {
-                font-size: 0.68rem;
-                padding: 4px 10px;
-            }
-            .site-footer {
-                max-width: 90%;
-                width: 90%;
-                font-size: 0.55rem;
-                line-height: 1.3;
-                margin-bottom: 10px;
-            }
-            .card-container {
-                padding: 25px 20px;
-                width: 90%;
-                max-height: 68vh;
-                max-height: 68dvh;
-                margin-bottom: 20px; 
-            }
-            .card-container.is-menu-state {
-                width: 100vw !important;
-                height: 100vh !important;
-                height: 100dvh !important;
-                max-height: 100vh !important;
-                max-height: 100dvh !important;
-                margin-top: 0px;
-                margin-bottom: 0px;
-            }
-            #story-text {
-                font-size: 1.1rem;
-                min-height: 120px;
-                max-height: 38vh;
-                max-height: 38dvh;
-            }
-            #story-text.menu-centered {
-                font-size: 2.2rem !important; /* Mobile Title Font Size */
-            }
-            .next-btn {
-                width: 100%;
-                box-sizing: border-box;
-                margin-top: 20px;
-                padding: 10px 20px;
-            }
+            .audio-controls { top: 12px !important; right: 12px !important; }
+            .control-btn { font-size: 0.68rem; padding: 4px 10px; }
+            .site-footer { max-width: 90%; width: 90%; font-size: 0.55rem; line-height: 1.3; margin-bottom: 10px; }
+            .card-container { padding: 25px 20px; width: 90%; max-height: 68vh; max-height: 68dvh; margin-bottom: 20px; }
+            .card-container.is-menu-state { width: 100vw !important; height: 100vh !important; height: 100dvh !important; max-height: 100vh !important; max-height: 100dvh !important; margin-top: 0px; margin-bottom: 0px; }
+            #story-text { font-size: 1.1rem; min-height: 120px; max-height: 38vh; max-height: 38dvh; }
+            #story-text.menu-centered { font-size: 2.2rem !important; }
+            .next-btn { width: 100%; box-sizing: border-box; margin-top: 20px; padding: 10px 20px; }
         }
     </style>
 </head>
 <body>
-
-    <div class="audio-controls">
-        <button id="voice-btn" class="control-btn" onclick="toggleVoiceEngine()">VOICE: ON</button>
-    </div>
-
-    <!-- Atmospheric Disclaimer Header Row Node - Relocated right above the card container stack -->
-    <header id="app-footer" class="site-footer">
-        All stories are fictional.
-    </header>
-
-    <!-- Main Glassmorphism Framework Interface Box (Starts in Fullscreen Centered Menu State) -->
+    <div class="audio-controls"><button id="voice-btn" class="control-btn" onclick="toggleVoiceEngine()">VOICE: ON</button></div>
+    <header id="app-footer" class="site-footer">All stories are fictional.</header>
     <div id="main-frame-box" class="card-container is-menu-state" style="cursor: pointer;" onclick="enterTheHorror()">
-        <!-- Title & Story Container Element Node -->
         <div id="story-text" class="menu-centered">Enter</div>
-        
-        <!-- Action Button Element Node -->
         <button id="action-trigger" class="next-btn" style="display: none;" onclick="showRandomStory(event)">Read Another</button>
     </div>
-
-    <script src="narrator.js?v=2"></script>
     <script>
         let ghostStories = [];
         let unreadStories = [];
         let isVoiceEnabled = true;
         let hasEntered = false;
-        
+        let preferredVoice = null;
         let audioCtx = null;
         let activeStoryInstanceId = 0;
 
-        // Dynamic Async Loader with automated Cache-Busting mapping logic
+        function choosePreferredVoice() {
+            if (!('speechSynthesis' in window)) return null;
+            const voices = window.speechSynthesis.getVoices();
+            if (!voices.length) return preferredVoice;
+            const preferences = [/Microsoft David/i,/Microsoft Mark/i,/Microsoft Guy/i,/Google US English/i,/Samantha/i,/Daniel/i,/Alex/i,/English.*Male/i];
+            for (const pattern of preferences) {
+                const match = voices.find(v => /^en(-|_)/i.test(v.lang || '') && pattern.test(v.name || ''));
+                if (match) return match;
+            }
+            return voices.find(v => /^en-US$/i.test(v.lang || '')) || voices.find(v => /^en(-|_)/i.test(v.lang || '')) || voices[0] || null;
+        }
+        function refreshPreferredVoice() { const selected = choosePreferredVoice(); if (selected) preferredVoice = selected; }
+        function applyVoiceStyle(utterance, pitch, rate) { if (preferredVoice) utterance.voice = preferredVoice; utterance.lang = preferredVoice?.lang || 'en-US'; utterance.pitch = pitch; utterance.rate = rate; utterance.volume = 1.0; }
+        function speakLine(text, pitch, rate, onDone) {
+            if (!text || !isVoiceEnabled) { onDone(); return; }
+            const utterance = new SpeechSynthesisUtterance(text);
+            applyVoiceStyle(utterance, pitch, rate);
+            let finished = false;
+            const finish = () => { if (finished) return; finished = true; clearTimeout(safetyTimer); onDone(); };
+            utterance.onend = finish;
+            utterance.onerror = finish;
+            const safetyTimer = setTimeout(finish, Math.max(8000, text.length * 180));
+            try { window.speechSynthesis.speak(utterance); } catch (error) { finish(); }
+        }
         async function loadStoriesFromJson() {
             try {
                 const response = await fetch('stories.json?t=' + Date.now());
                 if (!response.ok) throw new Error('Network structure retrieval mismatch.');
-                
                 const data = await response.json();
                 ghostStories = data.stories.map(item => item.lines);
                 unreadStories = [...ghostStories];
-                
-                console.log(`Successfully mapped ${ghostStories.length} horror entries out of JSON database.`);
             } catch (error) {
                 console.error('Failed to resolve narrative data layer over async channel:', error);
                 ghostStories = [["[T-NORMAL] The story archive connection was severed in the dark."]];
                 unreadStories = [...ghostStories];
             }
         }
-
         function renderAnimatedText(targetStoryArray, alignJustify = false) {
-            const container = document.getElementById('story-text');
-            container.innerHTML = ""; 
-            
-            if (alignJustify) {
-                container.classList.remove('menu-centered');
-            } else {
-                container.classList.add('menu-centered');
-            }
-
+            const container = document.getElementById('story-text'); container.innerHTML = "";
+            alignJustify ? container.classList.remove('menu-centered') : container.classList.add('menu-centered');
             targetStoryArray.forEach((rawLine, pIndex) => {
                 const displayLine = rawLine.replace(/^\[[A-Z\-]+\]\s*/, '');
-                
-                const pElement = document.createElement('p');
-                pElement.style.margin = "0 0 1.5rem 0"; 
-                if (pIndex === targetStoryArray.length - 1) pElement.style.margin = "0"; 
-                
-                const words = displayLine.split(' ');
-
-                words.forEach((word, index) => {
-                    const wordSpan = document.createElement('span');
-                    wordSpan.textContent = word;
-                    wordSpan.classList.add('word-shiver');
-                    wordSpan.style.animationDelay = `${Math.random() * 0.4}s`;
-                    pElement.appendChild(wordSpan);
-
-                    if (index < words.length - 1) {
-                        const space = document.createTextNode(" ");
-                        pElement.appendChild(space);
-                    }
-                });
-
+                const pElement = document.createElement('p'); pElement.style.margin = "0 0 1.5rem 0"; if (pIndex === targetStoryArray.length - 1) pElement.style.margin = "0";
+                displayLine.split(' ').forEach((word, index, words) => { const wordSpan = document.createElement('span'); wordSpan.textContent = word; wordSpan.classList.add('word-shiver'); wordSpan.style.animationDelay = `${Math.random() * 0.4}s`; pElement.appendChild(wordSpan); if (index < words.length - 1) pElement.appendChild(document.createTextNode(" ")); });
                 container.appendChild(pElement);
             });
-            
             container.scrollTop = 0;
         }
-
         function enterTheHorror() {
-            if (hasEntered) return;
-            hasEntered = true;
-            
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            
-            const mainBox = document.getElementById('main-frame-box');
-            mainBox.style.cursor = "default";
-            mainBox.removeAttribute('onclick');
-            
-            mainBox.classList.remove('is-menu-state');
-            
-            document.getElementById('app-footer').classList.add('active-state');
-            
-            document.getElementById('action-trigger').style.display = "inline-block";
-            showRandomStory();
+            if (hasEntered) return; hasEntered = true;
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            refreshPreferredVoice();
+            const mainBox = document.getElementById('main-frame-box'); mainBox.style.cursor = "default"; mainBox.removeAttribute('onclick'); mainBox.classList.remove('is-menu-state');
+            document.getElementById('app-footer').classList.add('active-state'); document.getElementById('action-trigger').style.display = "inline-block"; showRandomStory();
         }
-
         function showRandomStory(event) {
-            if (event) event.stopPropagation();
-
-            window.speechSynthesis.cancel();
-            activeStoryInstanceId++;
-            const runInstanceCheck = activeStoryInstanceId;
-
-            const actionBtn = document.getElementById('action-trigger');
-
-            if (unreadStories.length === 0) {
-                unreadStories = [...ghostStories]; 
-                actionBtn.innerText = "Read Another";
-            }
-
-            const randomIndex = Math.floor(Math.random() * unreadStories.length);
-            const chosenStoryArray = unreadStories.splice(randomIndex, 1)[0];
-
-            renderAnimatedText(chosenStoryArray, true);
-            
-            if (unreadStories.length === 0) {
-                actionBtn.innerText = "Restart";
-            }
-            
-            if (isVoiceEnabled) {
-                speakSequentialStory(chosenStoryArray, 0, runInstanceCheck);
-            }
+            if (event) event.stopPropagation(); window.speechSynthesis.cancel(); activeStoryInstanceId++; const runInstanceCheck = activeStoryInstanceId; const actionBtn = document.getElementById('action-trigger');
+            if (unreadStories.length === 0) { unreadStories = [...ghostStories]; actionBtn.innerText = "Read Another"; }
+            const randomIndex = Math.floor(Math.random() * unreadStories.length); const chosenStoryArray = unreadStories.splice(randomIndex, 1)[0]; renderAnimatedText(chosenStoryArray, true);
+            if (unreadStories.length === 0) actionBtn.innerText = "Restart";
+            if (isVoiceEnabled) speakSequentialStory(chosenStoryArray, 0, runInstanceCheck);
         }
-
         function playMidiSoundEffect(sfxTag, sfxText, runInstanceCheck, callback) {
-            if (!isVoiceEnabled || !audioCtx || runInstanceCheck !== activeStoryInstanceId) {
-                if (callback) callback();
-                return;
-            }
-
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            const tag = sfxTag.toLowerCase();
-            const normalizedText = sfxText.toLowerCase();
-            
-            let beatDuration = 0.35; 
-            let frequencyModifier = 0;
-
-            if (tag.includes('fast') || tag.includes('energetic')) {
-                beatDuration = 0.13; 
-            } else if (tag.includes('slow') || tag.includes('long')) {
-                beatDuration = 0.65; 
-            } else if (tag.includes('short')) {
-                beatDuration = 0.20; 
-            }
-
-            if (tag.includes('deep')) {
-                frequencyModifier = -35; 
-            } else if (tag.includes('energetic')) {
-                frequencyModifier = 40; 
-            }
-
-            const cleaned = normalizedText.replace(/[^a-z. ]/g, '');
-            const beats = cleaned.split(/\s+|\.\.\.+/).filter(b => b.trim().length > 0);
-            
-            let startTime = audioCtx.currentTime + 0.05;
-
-            beats.forEach((beat) => {
-                if (beat === 'quick' || beat === 'slow') return;
-
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-                
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-
-                let frequency = 90 + frequencyModifier; 
-                let type = 'square'; 
-                let duration = 0.15;
-
-                if (beat.includes('tak') || beat.includes('tick') || beat.includes('tock') || beat.includes('snap')) {
-                    frequency = beat.includes('tick') ? (180 + frequencyModifier) : (110 + frequencyModifier);
-                    type = 'square';
-                    duration = 0.04; 
-                } else if (beat.includes('creak') || beat.includes('shhh') || beat.includes('shwrrk')) {
-                    frequency = 75 + frequencyModifier;
-                    type = 'sawtooth';
-                    duration = 0.3; 
-                } else if (beat.includes('thud') || beat.includes('crash') || beat.includes('growl') || beat.includes('crunch') || beat.includes('tear')) {
-                    frequency = 55 + frequencyModifier; 
-                    type = 'sawtooth';
-                    duration = 0.25;
-                } else if (beat.includes('bzzz') || beat.includes('pop')) {
-                    frequency = 130 + frequencyModifier;
-                    type = 'triangle';
-                    duration = 0.2;
-                } else if (beat.includes('hahaha')) {
-                    frequency = 65 + frequencyModifier;
-                    type = 'sawtooth';
-                    duration = 0.12;
-                }
-
-                osc.type = type;
-                osc.frequency.setValueAtTime(Math.max(20, frequency), startTime);
-                
-                if (type === 'sawtooth') {
-                    osc.frequency.exponentialRampToValueAtTime(Math.max(20, frequency - 20), startTime + duration);
-                }
-
-                gainNode.gain.setValueAtTime(0.12, startTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-
-                osc.start(startTime);
-                osc.stop(startTime + duration);
-
-                startTime += beatDuration;
+            if (!isVoiceEnabled || !audioCtx || runInstanceCheck !== activeStoryInstanceId) { if (callback) callback(); return; }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const tag = sfxTag.toLowerCase(), normalizedText = sfxText.toLowerCase(); let beatDuration = 0.35, frequencyModifier = 0;
+            if (tag.includes('fast') || tag.includes('energetic')) beatDuration = 0.13; else if (tag.includes('slow') || tag.includes('long')) beatDuration = 0.65; else if (tag.includes('short')) beatDuration = 0.20;
+            if (tag.includes('deep')) frequencyModifier = -35; else if (tag.includes('energetic')) frequencyModifier = 40;
+            const beats = normalizedText.replace(/[^a-z. ]/g, '').split(/\s+|\.\.\.+/).filter(b => b.trim().length > 0); let startTime = audioCtx.currentTime + 0.05;
+            beats.forEach((beat) => { if (beat === 'quick' || beat === 'slow') return; const osc = audioCtx.createOscillator(), gainNode = audioCtx.createGain(); osc.connect(gainNode); gainNode.connect(audioCtx.destination); let frequency = 90 + frequencyModifier, type = 'square', duration = 0.15;
+                if (beat.includes('tak') || beat.includes('tick') || beat.includes('tock') || beat.includes('snap')) { frequency = beat.includes('tick') ? 180 + frequencyModifier : 110 + frequencyModifier; duration = 0.04; }
+                else if (beat.includes('creak') || beat.includes('shhh') || beat.includes('shwrrk')) { frequency = 75 + frequencyModifier; type = 'sawtooth'; duration = 0.3; }
+                else if (beat.includes('thud') || beat.includes('crash') || beat.includes('growl') || beat.includes('crunch') || beat.includes('tear')) { frequency = 55 + frequencyModifier; type = 'sawtooth'; duration = 0.25; }
+                else if (beat.includes('bzzz') || beat.includes('pop')) { frequency = 130 + frequencyModifier; type = 'triangle'; duration = 0.2; }
+                else if (beat.includes('hahaha')) { frequency = 65 + frequencyModifier; type = 'sawtooth'; duration = 0.12; }
+                osc.type = type; osc.frequency.setValueAtTime(Math.max(20, frequency), startTime); if (type === 'sawtooth') osc.frequency.exponentialRampToValueAtTime(Math.max(20, frequency - 20), startTime + duration); gainNode.gain.setValueAtTime(0.12, startTime); gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration); osc.start(startTime); osc.stop(startTime + duration); startTime += beatDuration;
             });
-
-            const totalDurationMs = ((startTime - audioCtx.currentTime) * 1000) + 100;
-            setTimeout(() => {
-                if (runInstanceCheck === activeStoryInstanceId && callback) {
-                    callback();
-                }
-            }, totalDurationMs);
+            setTimeout(() => { if (runInstanceCheck === activeStoryInstanceId && callback) callback(); }, ((startTime - audioCtx.currentTime) * 1000) + 100);
         }
-
         function speakSequentialStory(storyArray, currentLineIndex, runInstanceCheck) {
             if (!isVoiceEnabled || currentLineIndex >= storyArray.length || runInstanceCheck !== activeStoryInstanceId) return;
-
-            const rawLine = storyArray[currentLineIndex];
-            const hasTag = rawLine.startsWith("[") && rawLine.includes("]");
-            
-            if (!hasTag) {
-                const utterance = new SpeechSynthesisUtterance(rawLine);
-                utterance.pitch = 0.85;
-                utterance.rate = 0.80;
-                utterance.onend = () => {
-                    if (runInstanceCheck === activeStoryInstanceId) speakSequentialStory(storyArray, currentLineIndex + 1, runInstanceCheck);
-                };
-                utterance.onerror = () => {
-                    if (runInstanceCheck === activeStoryInstanceId) speakSequentialStory(storyArray, currentLineIndex + 1, runInstanceCheck);
-                };
-                window.speechSynthesis.speak(utterance);
-                return;
-            }
-
-            const tagEndIndex = rawLine.indexOf("]");
-            const completeTag = rawLine.substring(1, tagEndIndex);
-            const cleanText = rawLine.substring(tagEndIndex + 1).trim();
-
-            if (completeTag.startsWith("S-")) {
-                playMidiSoundEffect(completeTag, cleanText, runInstanceCheck, () => {
-                    if (runInstanceCheck === activeStoryInstanceId) {
-                        speakSequentialStory(storyArray, currentLineIndex + 1, runInstanceCheck);
-                    }
-                });
-                return;
-            }
-
-            const utterance = new SpeechSynthesisUtterance(cleanText);
-            
-            if (completeTag.includes("HAPPY")) {
-                utterance.pitch = 1.05; 
-                utterance.rate = 0.95;  
-            } else if (completeTag.includes("SCREAM")) {
-                utterance.pitch = 1.35; 
-                utterance.rate = 1.20;  
-            } else if (completeTag.includes("SCARED") || completeTag.includes("SAD")) {
-                utterance.pitch = 0.60; 
-                utterance.rate = 0.70;  
-            } else { 
-                utterance.pitch = 0.85;
-                utterance.rate = 0.80;
-            }
-
-            utterance.volume = 1.0;
-
-            utterance.onend = () => {
-                if (runInstanceCheck === activeStoryInstanceId) {
-                    speakSequentialStory(storyArray, currentLineIndex + 1, runInstanceCheck);
-                }
-            };
-
-            utterance.onerror = () => {
-                if (runInstanceCheck === activeStoryInstanceId) {
-                    speakSequentialStory(storyArray, currentLineIndex + 1, runInstanceCheck);
-                }
-            };
-
-            window.speechSynthesis.speak(utterance);
+            const rawLine = storyArray[currentLineIndex], hasTag = rawLine.startsWith("[") && rawLine.includes("]");
+            const next = () => { if (runInstanceCheck === activeStoryInstanceId) speakSequentialStory(storyArray, currentLineIndex + 1, runInstanceCheck); };
+            if (!hasTag) { speakLine(rawLine, 0.78, 0.78, next); return; }
+            const tagEndIndex = rawLine.indexOf("]"), completeTag = rawLine.substring(1, tagEndIndex), cleanText = rawLine.substring(tagEndIndex + 1).trim();
+            if (completeTag.startsWith("S-")) { playMidiSoundEffect(completeTag, cleanText, runInstanceCheck, next); return; }
+            if (completeTag.includes("HAPPY")) speakLine(cleanText, 0.95, 0.92, next);
+            else if (completeTag.includes("SCREAM")) speakLine(cleanText, 1.10, 1.08, next);
+            else if (completeTag.includes("SCARED")) speakLine(cleanText, 0.68, 0.72, next);
+            else if (completeTag.includes("SAD")) speakLine(cleanText, 0.64, 0.68, next);
+            else speakLine(cleanText, 0.78, 0.78, next);
         }
-
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
-        }
-
-        function toggleVoiceEngine() {
-            const btn = document.getElementById('voice-btn');
-            isVoiceEnabled = !isVoiceEnabled;
-            if (isVoiceEnabled) {
-                btn.innerText = "VOICE: ON";
-                btn.classList.remove('muted');
-                if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            } else {
-                btn.innerText = "VOICE: OFF";
-                btn.classList.add('muted');
-                window.speechSynthesis.cancel();
-                activeStoryInstanceId++; 
-            }
-        }
-
-        function spawnGhost() {
-            const ghost = document.createElement('div');
-            ghost.classList.add('bg-ghost');
-            
-            const ghostBody = document.createElement('div');
-            ghostBody.classList.add('bg-ghost-body');
-            ghostBody.innerHTML = '👻';
-            ghost.appendChild(ghostBody);
-
-            const startX = Math.random() * window.innerWidth;
-            const startY = Math.random() * window.innerHeight;
-            ghost.style.left = startX + 'px';
-            ghost.style.top = startY + 'px';
-
-            const driftX = (Math.random() - 0.5) * 150;
-            const driftY = (Math.random() - 0.5) * 150;
-            ghost.style.setProperty('--x-drift', `${driftX}px`);
-            ghost.style.setProperty('--y-drift', `${driftY}px`);
-
-            const sizeRandom = 1.8 + Math.random() * 3; 
-            ghost.style.fontSize = `${sizeRandom}rem`;
-
-            const flipDirection = Math.random() > 0.5 ? 'scaleX(1)' : 'scaleX(-1)';
-            ghostBody.style.setProperty('--base-flip', flipDirection);
-
-            const randomRoll = Math.random();
-            let targetOpacity = 0.06; 
-            if (randomRoll > 0.85) {
-                targetOpacity = 0.20; 
-            } else if (randomRoll > 0.50) {
-                targetOpacity = 0.12; 
-            }
-            ghost.style.setProperty('--target-opacity', targetOpacity);
-
-            ghost.addEventListener('mousedown', function() {
-                ghost.classList.add('fly-away');
-                setTimeout(() => { ghost.remove(); }, 800);
-            });
-            ghost.addEventListener('touchstart', function() {
-                ghost.classList.add('fly-away');
-                setTimeout(() => { ghost.remove(); }, 800);
-            });
-
-            document.body.appendChild(ghost);
-
-            setTimeout(() => {
-                if (ghost.parentNode) ghost.remove();
-            }, 10000);
-        }
-
-        function ghostLoop() {
-            spawnGhost();
-            const nextSpawnDelay = 2000 + Math.random() * 3000;
-            setTimeout(ghostLoop, nextSpawnDelay);
-        }
-
-        window.onload = async () => {
-            const initialTitleArray = ["Enter"];
-            renderAnimatedText(initialTitleArray, false);
-            
-            // Core database link initialization update
-            await loadStoriesFromJson();
-            
-            ghostLoop();
-        };
+        if ('speechSynthesis' in window) { refreshPreferredVoice(); window.speechSynthesis.onvoiceschanged = refreshPreferredVoice; }
+        function toggleVoiceEngine() { const btn = document.getElementById('voice-btn'); isVoiceEnabled = !isVoiceEnabled; if (isVoiceEnabled) { btn.innerText = "VOICE: ON"; btn.classList.remove('muted'); refreshPreferredVoice(); if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); } else { btn.innerText = "VOICE: OFF"; btn.classList.add('muted'); window.speechSynthesis.cancel(); activeStoryInstanceId++; } }
+        function spawnGhost() { const ghost = document.createElement('div'); ghost.classList.add('bg-ghost'); const ghostBody = document.createElement('div'); ghostBody.classList.add('bg-ghost-body'); ghostBody.innerHTML = '👻'; ghost.appendChild(ghostBody); ghost.style.left = Math.random() * window.innerWidth + 'px'; ghost.style.top = Math.random() * window.innerHeight + 'px'; ghost.style.setProperty('--x-drift', `${(Math.random() - 0.5) * 150}px`); ghost.style.setProperty('--y-drift', `${(Math.random() - 0.5) * 150}px`); ghost.style.fontSize = `${1.8 + Math.random() * 3}rem`; ghostBody.style.setProperty('--base-flip', Math.random() > 0.5 ? 'scaleX(1)' : 'scaleX(-1)'); const randomRoll = Math.random(); ghost.style.setProperty('--target-opacity', randomRoll > 0.85 ? 0.20 : randomRoll > 0.50 ? 0.12 : 0.06); const fly = () => { ghost.classList.add('fly-away'); setTimeout(() => ghost.remove(), 800); }; ghost.addEventListener('mousedown', fly); ghost.addEventListener('touchstart', fly); document.body.appendChild(ghost); setTimeout(() => { if (ghost.parentNode) ghost.remove(); }, 10000); }
+        function ghostLoop() { spawnGhost(); setTimeout(ghostLoop, 2000 + Math.random() * 3000); }
+        window.onload = async () => { renderAnimatedText(["Enter"], false); await loadStoriesFromJson(); ghostLoop(); };
     </script>
-
-    <script>
-      if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js?v=2').catch(()=>{}); }
-    </script>
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./service-worker.js?v=3').catch(()=>{}); }</script>
 </body>
 </html>
