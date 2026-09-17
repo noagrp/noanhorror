@@ -1,6 +1,6 @@
-const CACHE='noan-horror-v2';
-const SHELL=['./','./index.html','./design.css','./manifest.webmanifest','./stories.json','./narrator.js','./narrator-worker.js','./favicon-32x32.png','./apple-touch-icon.png','./icon-192.png','./icon-512.png','./voice/am_granite.bin'];
-self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL.filter(x=>!x.includes('am_granite.bin')))).catch(()=>{}))});
+const CACHE='noan-horror-v3';
+const SHELL=['./','./index.html','./design.css','./manifest.webmanifest','./stories.json','./favicon-32x32.png','./apple-touch-icon.png','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).catch(()=>{}))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
   if(e.request.method!=='GET')return;
