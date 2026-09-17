@@ -20,7 +20,7 @@
     ttsPromise=(async()=>{
       const mod=await import('https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm');
       const device=navigator.gpu?'webgpu':'wasm';
-      const dtype=navigator.gpu?'fp32':'q4';
+      const dtype=navigator.gpu?'q8':'q4';
       const tts=await mod.KokoroTTS.from_pretrained(MODEL_ID,{device,dtype});
       setVoiceStatus('VOICE: ON');
       return tts;
